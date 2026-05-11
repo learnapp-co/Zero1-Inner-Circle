@@ -75,15 +75,11 @@ export async function POST(req: NextRequest) {
       }
     }
 
-    const { qrPayload: _, plusOneQrPayload: __, ...safeAttendee } = updated
+    // Strip the nested event relation — client only needs the flat attendee row
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const { event: _ev, ...attendeeData } = updated
 
-    return Response.json({
-      attendee: {
-        ...safeAttendee,
-        qrPayload: updated.qrPayload,
-        plusOneQrPayload: updated.plusOneQrPayload,
-      },
-    })
+    return Response.json({ attendee: attendeeData })
   } catch (e) {
     console.error(e)
     return Response.json({ error: 'Internal server error' }, { status: 500 })

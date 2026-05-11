@@ -65,6 +65,7 @@ export default function AttendeesPage() {
 
   const [statusMenuId, setStatusMenuId] = useState<string | null>(null)
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => { loadEvent() }, [])
 
   async function loadEvent() {
