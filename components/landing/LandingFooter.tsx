@@ -1,10 +1,11 @@
 import type { LandingEvent } from './types'
 import { ASSET_ZERO1_LOGO_NAV, ASSET_ZERO1_LOGO_FOOTER, ASSET_INSTAGRAM, ASSET_EMAIL, ASSET_PARTNER_LOGO } from './assets'
+import { sanitizeUrl } from './sanitizeUrl'
 
 export function LandingFooter({ event }: { event: LandingEvent }) {
   const instagram = event.settings?.instagramUrl
   const email = event.settings?.emailAddress
-  const partnerLogo = event.settings?.partnerLogoUrl || ASSET_PARTNER_LOGO
+  const partnerLogo = sanitizeUrl(event.settings?.partnerLogoUrl) || ASSET_PARTNER_LOGO
 
   return (
     <>

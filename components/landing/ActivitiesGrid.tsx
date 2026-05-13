@@ -1,6 +1,7 @@
 import { SectionTitle } from './SectionTitle'
 import type { ActivityItem, LandingEvent } from './types'
 import { ASSET_ICON_STACK_ALT, ASSET_ICON_BRAIN, ASSET_ICON_MONEY_ALT } from './assets'
+import { sanitizeUrl } from './sanitizeUrl'
 
 const ICONS: Record<string, string> = {
   stack: ASSET_ICON_STACK_ALT,
@@ -17,9 +18,8 @@ const DEFAULT_ACTIVITIES: ActivityItem[] = [
 ]
 
 function ActivityCard({ item, desktop }: { item: ActivityItem; desktop?: boolean }) {
-  const iconSrc = item.icon?.startsWith('http')
-    ? item.icon
-    : (ICONS[item.icon] ?? ASSET_ICON_STACK_ALT)
+  const sanitized = sanitizeUrl(item.icon?.startsWith('http') ? item.icon : null)
+  const iconSrc = sanitized ?? (ICONS[item.icon ?? ''] ?? ASSET_ICON_STACK_ALT)
   return (
     <div className="flex flex-col items-start" style={{ gap: desktop ? 8 : 18 }}>
       <img alt="" src={iconSrc} style={{ width: desktop ? 24 : 24, height: desktop ? 24 : 24 }} />

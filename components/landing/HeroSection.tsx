@@ -1,5 +1,6 @@
 import type { LandingEvent } from './types'
 import { ASSET_HERO_IMG1 } from './assets'
+import { sanitizeUrl } from './sanitizeUrl'
 
 /*
  * Figma node 5797:1357 — hero container: 690px tall
@@ -26,7 +27,7 @@ const DEFAULT_ABOUT = [
 ]
 
 export function HeroSection({ event }: { event: LandingEvent }) {
-  const heroImage = event.heroImageUrl || ASSET_HERO_IMG1
+  const heroImage = sanitizeUrl(event.heroImageUrl) || ASSET_HERO_IMG1
   const rawText = event.settings?.aboutText
   const paragraphs = rawText ? rawText.split('\n').filter(Boolean) : DEFAULT_ABOUT
 
