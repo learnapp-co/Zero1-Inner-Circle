@@ -66,3 +66,16 @@ export const ASSET_EMAIL          = 'https://www.figma.com/api/mcp/asset/0c0fd7a
 
 // ─── Partner logo ───────────────────────────────────────────────────────────
 export const ASSET_PARTNER_LOGO   = 'https://www.figma.com/api/mcp/asset/170aaf1c-7eb4-436e-b613-4ccaf7aef3e7' // image 1923 (Bombay Coffee)
+
+// ─── Selection Process step icons (dynamic color) ───────────────────────────
+export const ASSET_STEP_MISSION  = 'https://www.figma.com/api/mcp/asset/5500c751-9d77-4e27-8d1b-ac6c33e56b38' // target-dynamic-color (38×38)
+export const ASSET_STEP_REVIEW   = 'https://www.figma.com/api/mcp/asset/0908054c-7a79-4274-a3c7-0b63bf73a4e5' // thumb-up-dynamic-color (32×32)
+export const ASSET_STEP_PAYMENT  = 'https://www.figma.com/api/mcp/asset/a048e179-499b-49de-9b35-5520fca53801' // dollar-dollar-color (32×32)
+export const ASSET_STEP_RSVP     = 'https://www.figma.com/api/mcp/asset/4c7dff28-7f01-4b49-a265-fae24f9c42fd' // chat-text-dynamic-color (32×32)
+
+// ─── Event card info icons ───────────────────────────────────────────────────
+export const ASSET_CARD_ICON_DATE   = 'https://www.figma.com/api/mcp/asset/7640ce84-55e1-4598-8319-e7a56c074feb' // image 1929 (44×44 date/calendar)
+export const ASSET_CARD_ICON_PASSES = 'https://www.figma.com/api/mcp/asset/281128e2-5468-4df5-8b2a-a117de909a22' // image 1928 (44×44 passes/ticket)
+
+// ─── Info icon ──────────────────────────────────────────────────────────────
+export const ASSET_INFO_ICON     = 'https://www.figma.com/api/mcp/asset/caa162f5-f692-4752-b40a-e4def4a6cf6b' // material-symbols-light:info-outline-rounded (24×24)

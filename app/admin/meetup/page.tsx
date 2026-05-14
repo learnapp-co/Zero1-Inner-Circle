@@ -34,28 +34,29 @@ type MeetupForm = {
 }
 
 const DEFAULT_ACTIVITIES: ActivityItem[] = [
-  { title: 'Portfolio Foundations', description: 'How to build strong long-term portfolios with solid foundations', icon: 'stack' },
-  { title: 'Hidden Risks', description: 'Understand why some portfolios survive market crashes while others collapse', icon: 'stack' },
-  { title: 'Costly Mistakes', description: 'Investigate real-world investing mistakes through interactive gameplay', icon: 'stack' },
-  { title: 'Risk Analysis', description: 'Understand risk beyond just "high risk" and "low risk"', icon: 'brain' },
-  { title: 'Decision Psychology', description: 'Detect behavioural traps while budgeting, saving, and investing', icon: 'money' },
+  { title: 'Risk Analysis', description: 'Analyse the difference between perceived risk and actual portfolio risk through evidence-based financial reasoning', icon: 'stack' },
+  { title: 'Structural Risks', description: 'Investigate real investing mistakes using frameworks used in portfolio analysis, risk assessment, and behavioural finance', icon: 'money' },
+  { title: 'Investor Psychology', description: 'Identify how investor behaviour changes under uncertainty, volatility, social influence, and performance pressure', icon: 'brain' },
+  { title: 'Portfolio Diagnostics', description: 'Evaluate portfolios beyond returns by analysing diversification quality, concentration exposure, correlation between holdings, and other hidden structural weaknesses', icon: 'stack' },
+  { title: 'Stress Testing', description: 'Recognise how portfolio construction, liquidity planning, and investment decision-making interact during financial stress situations', icon: 'stack' },
 ]
 
 const DEFAULT_TIMELINE: TimelineItem[] = [
-  { time: '11 AM – 11:30 AM',    title: 'Money Charades',                          imageUrl: '' },
-  { time: '11:30 AM – 12:30 PM', title: 'The Curious Case of a Dead Portfolio',    imageUrl: '' },
-  { time: '12:30 PM – 1:30 PM',  title: 'Lunch, Networking & Experience Zones',    imageUrl: '' },
-  { time: '1:30 PM – 2:15 PM',   title: 'Battle of the Paylords',                  imageUrl: '' },
-  { time: '2:15 PM – 3:00 PM',   title: 'The Silver Lining (Origami balloons)',    imageUrl: '' },
+  { time: '11 AM – 11:30 AM',    title: 'Money Charades',                             imageUrl: '' },
+  { time: '11:30 AM – 12:30 PM', title: 'The Curious Case of a Dead Portfolio',       imageUrl: '' },
+  { time: '12:45 PM – 1:00 PM',  title: 'Networking and Experience Zones',            imageUrl: '' },
+  { time: '1:00 PM – 2:00 PM',   title: 'Balance(d) Sheet',                           imageUrl: '' },
+  { time: '2:00 PM – 3:00 PM',   title: 'Lunch',                                      imageUrl: '' },
 ]
 
 const DEFAULT_THINGS_TO_KNOW = [
   'There are only 15 tickets available for this event',
-  'Tickets are priced at ₹3,000. Each ticket includes the entry of the participant, the entry of a +1, and food and beverages for the duration of the event',
   'Tickets are non-transferable. Entry will be denied if the names of the participant and +1 do not match the ticket',
+  'Tickets are priced ₹3,000 + GST. Each ticket includes the entry of the participant, the entry of a +1, and food and beverages for the duration of the event',
   'Both the participant and +1 must be over 18 years of age and must carry a Government Photo ID to the event for verification',
   'Sharp objects, prohibited substances, lighters, e-cigarettes, food items, etc. are prohibited',
   'For any medication you wish to carry, please bring a doctor-signed prescription',
+  'Passes for Inner Circle events are non-cancellable and non-refundable',
 ].join('\n')
 
 const DEFAULT_FORM: MeetupForm = {

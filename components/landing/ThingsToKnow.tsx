@@ -6,11 +6,12 @@ const PENS = [ASSET_PEN_1, ASSET_PEN_2, ASSET_PEN_3, ASSET_PEN_4]
 
 const DEFAULT_ITEMS = [
   'There are only 15 tickets available for this event',
-  'Tickets are priced at ₹3,000. Each ticket includes the entry of the participant, the entry of a +1, and food and beverages for the duration of the event',
   'Tickets are non-transferable. Entry will be denied if the names of the participant and +1 do not match the ticket',
+  'Tickets are priced ₹3,000 + GST. Each ticket includes the entry of the participant, the entry of a +1, and food and beverages for the duration of the event',
   'Both the participant and +1 must be over 18 years of age and must carry a Government Photo ID to the event for verification',
   'Sharp objects, prohibited substances, lighters, e-cigarettes, food items, etc. are prohibited',
   'For any medication you wish to carry, please bring a doctor-signed prescription',
+  'Passes for Inner Circle events are non-cancellable and non-refundable',
 ]
 
 function Item({ text, size }: { text: string; size: 'sm' | 'lg' }) {

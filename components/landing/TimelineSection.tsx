@@ -18,9 +18,9 @@ const V_LINE         = 'https://www.figma.com/api/mcp/asset/060b905f-c5cd-49e8-a
 const DEFAULT_TIMELINE: TimelineItem[] = [
   { time: '11 AM – 11:30 AM',    title: 'Money Charades',                         imageUrl: '' },
   { time: '11:30 AM – 12:30 PM', title: 'The Curious Case of a Dead Portfolio',   imageUrl: '' },
-  { time: '12:30 PM – 1:30 PM',  title: 'Lunch, Networking & Experience Zones',   imageUrl: '' },
-  { time: '1:30 PM – 2:15 PM',   title: 'Battle of the Paylords',                 imageUrl: '' },
-  { time: '2:15 PM – 3:00 PM',   title: 'The Silver Lining (Origami balloons)',   imageUrl: '' },
+  { time: '12:45 PM – 1:00 PM',  title: 'Networking and Experience Zones',        imageUrl: '' },
+  { time: '1:00 PM – 2:00 PM',   title: 'Balance(d) Sheet',                       imageUrl: '' },
+  { time: '2:00 PM – 3:00 PM',   title: 'Lunch',                                  imageUrl: '' },
 ]
 
 const ACCENT = ['#fbb03a', '#ffacf1', '#bc9cff', '#f1a76a', '#00f2ee']
@@ -147,7 +147,7 @@ export function TimelineSection({ event }: { event: LandingEvent }) {
     <>
       {/* ══════ MOBILE ══════ */}
       <div className="flex flex-col md:hidden" style={{ gap: 32 }}>
-        <SectionTitle>Activities for you</SectionTitle>
+        <SectionTitle>Flow of the Event</SectionTitle>
         <div className="px-4">
           <div className="relative" style={{ width: 328, height: M_BLOCK_H }}>
             {/* vertical centre line */}
@@ -179,7 +179,7 @@ export function TimelineSection({ event }: { event: LandingEvent }) {
 
       {/* ══════ DESKTOP ══════ */}
       <div className="hidden md:flex flex-col" style={{ gap: 56, width: 678 }}>
-        <SectionTitle>Activities for you</SectionTitle>
+        <SectionTitle>Flow of the Event</SectionTitle>
         <div className="relative" style={{ width: 678, height: D_BLOCK_H }}>
 
           {/* Vertical centre line: spans first dot to last dot */}

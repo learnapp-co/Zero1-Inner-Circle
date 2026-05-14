@@ -10,11 +10,11 @@ const ICONS: Record<string, string> = {
 }
 
 const DEFAULT_ACTIVITIES: ActivityItem[] = [
-  { title: 'Portfolio Foundations', description: 'How to build strong long-term portfolios with solid foundations', icon: 'stack' },
-  { title: 'Hidden Risks', description: 'Understand why some portfolios survive market crashes while others collapse', icon: 'stack' },
-  { title: 'Costly Mistakes', description: 'Investigate real-world investing mistakes through interactive gameplay', icon: 'stack' },
-  { title: 'Risk Analysis', description: 'Understand risk beyond just "high risk" and "low risk"', icon: 'brain' },
-  { title: 'Decision Psychology', description: 'Detect behavioural traps while budgeting, saving, and investing', icon: 'money' },
+  { title: 'Risk Analysis', description: 'Analyse the difference between perceived risk and actual portfolio risk through evidence-based financial reasoning', icon: 'stack' },
+  { title: 'Structural Risks', description: 'Investigate real investing mistakes using frameworks used in portfolio analysis, risk assessment, and behavioural finance', icon: 'money' },
+  { title: 'Investor Psychology', description: 'Identify how investor behaviour changes under uncertainty, volatility, social influence, and performance pressure', icon: 'brain' },
+  { title: 'Portfolio Diagnostics', description: 'Evaluate portfolios beyond returns by analysing diversification quality, concentration exposure, correlation between holdings, and other hidden structural weaknesses', icon: 'stack' },
+  { title: 'Stress Testing', description: 'Recognise how portfolio construction, liquidity planning, and investment decision-making interact during financial stress situations', icon: 'stack' },
 ]
 
 function ActivityCard({ item, desktop }: { item: ActivityItem; desktop?: boolean }) {
