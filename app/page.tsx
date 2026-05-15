@@ -35,6 +35,8 @@ async function getEvent(): Promise<LandingEvent | null> {
             aboutText: s.aboutText ?? null,
             sessionDescription: s.sessionDescription ?? null,
             partnerLogoUrl: s.partnerLogoUrl ?? null,
+            partnerName: s.partnerName ?? null,
+            navLogoUrl: s.navLogoUrl ?? null,
             // eslint-disable-next-line @typescript-eslint/no-explicit-any
             activities: Array.isArray(s.activities) ? (s.activities as any[]) : null,
             // eslint-disable-next-line @typescript-eslint/no-explicit-any

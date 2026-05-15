@@ -1,5 +1,5 @@
 import type { LandingEvent } from './types'
-import { ASSET_HERO_IMG1 } from './assets'
+import { ASSET_HERO_BG_MAIN } from './assets'
 import { sanitizeUrl } from './sanitizeUrl'
 
 /*
@@ -31,7 +31,7 @@ const DEFAULT_BULLETS = [
 ]
 
 export function HeroSection({ event }: { event: LandingEvent }) {
-  const heroImage = sanitizeUrl(event.heroImageUrl) || ASSET_HERO_IMG1
+  const heroImage = sanitizeUrl(event.heroImageUrl) || ASSET_HERO_BG_MAIN
   const subtitle = event.settings?.heroSubtitle ?? DEFAULT_SUBTITLE
   const rawText = event.settings?.aboutText
   const bullets = rawText ? rawText.split('\n').filter(Boolean) : DEFAULT_BULLETS
@@ -101,11 +101,11 @@ export function HeroSection({ event }: { event: LandingEvent }) {
             className="absolute w-full h-full pointer-events-none object-cover object-center"
           />
         </div>
-        {/* Bottom gradient — fades from page bg (#0f071a) to transparent */}
+        {/* Bottom gradient — exact Figma 6055:4051 values */}
         <div className="absolute left-0 right-0" style={{
-          top: 85,
-          height: 690,
-          background: 'linear-gradient(0.63deg, rgb(15,7,26) 6.76%, rgba(15,7,26,0.705) 45.87%, rgba(15,7,26,0) 99.66%)',
+          top: 0,
+          height: '100%',
+          background: 'linear-gradient(0.57deg, #0f071a 3.59%, rgba(15,7,26,0.705) 40.26%, rgba(15,7,26,0) 99.71%)',
         }} />
 
         {/* Text group: "Zero1 presents" + wordmark + subtitle + about text, y=346, w=708 */}
@@ -122,16 +122,15 @@ export function HeroSection({ event }: { event: LandingEvent }) {
             {/* Wordmark + subtitle (gap-12) */}
             <div className="flex flex-col items-center w-full" style={{ gap: 12 }}>
               <img alt="The Inner Circle" src={WORDMARK_DESKTOP} style={{ height: 78.5, width: 577, display: 'block' }} />
-              <p className="text-center w-full" style={{ fontFamily: 'Satoshi,sans-serif', fontWeight: 500, fontStyle: 'italic', fontSize: 28, lineHeight: 'normal', color: '#fff' }}>
+              <p style={{ fontFamily: '"Inter",sans-serif', fontWeight: 500, fontStyle: 'italic', fontSize: 27, lineHeight: 'normal', color: '#fff', whiteSpace: 'nowrap' }}>
                 {subtitle}
               </p>
             </div>
             {/* Bullet list */}
-            <ul style={{ listStyle: 'none', margin: 0, padding: 0, display: 'flex', flexDirection: 'column', gap: 10, width: '100%' }}>
+            <ul style={{ listStyleType: 'disc', margin: 0, padding: 0 }}>
               {bullets.map((b, i) => (
-                <li key={i} className="flex items-center justify-center" style={{ gap: 10 }}>
-                  <span style={{ color: '#f2ba30', fontSize: 10, flexShrink: 0 }}>◆</span>
-                  <span style={{ fontFamily: 'Satoshi,sans-serif', fontWeight: 400, fontSize: 18, lineHeight: '24px', color: '#b7b5bb' }}>{b}</span>
+                <li key={i} style={{ marginInlineStart: 24, fontFamily: 'Satoshi,sans-serif', fontWeight: 400, fontSize: 16, lineHeight: '24px', color: '#b7b5bb', whiteSpace: 'nowrap' }}>
+                  {b}
                 </li>
               ))}
             </ul>

@@ -34,14 +34,6 @@ const H_CONN_L    = 'https://www.figma.com/api/mcp/asset/4590f8db-dcf8-4a90-805d
 const H_CONN_R    = 'https://www.figma.com/api/mcp/asset/8d578b4a-7983-48ee-a5a9-afb8192562a4'
 const V_LINE      = 'https://www.figma.com/api/mcp/asset/060b905f-c5cd-49e8-a8ef-c1b833060565'
 
-/* ─── Default timeline content from Figma ────────────────────────────── */
-const DEFAULT_ITEMS: Required<TimelineItem>[] = [
-  { time: '11 AM – 11:30 AM',    title: 'Money Charades',                         description: 'The classic icebreaker, but with a money twist to it',                                                                                  imageUrl: '' },
-  { time: '11:30 AM – 12:30 PM', title: 'The Curious Case of a Dead Portfolio',   description: 'A case file, witness statements and evidence, we have it all. Now, it is on you to solve this money mystery',                           imageUrl: '' },
-  { time: '12:45 PM – 1:00 PM',  title: 'Networking and Experience Zones',        description: 'Some time for you to get to know your Inner Circle buddies better',                                                                       imageUrl: '' },
-  { time: '1:00 PM – 2:00 PM',   title: 'Balance(d) Sheet',                       description: "5 personalities, many money decisions - Who's doing money right? You decide",                                                           imageUrl: '' },
-  { time: '2:00 PM – 3:00 PM',   title: 'Lunch',                                  description: 'With an exclusive Zero1 Inner Circle menu to choose from',                                                                              imageUrl: '' },
-]
 
 /* ─── Desktop layout constants (matches Figma 6055:4051) ─────────────── */
 const D_CARD_W  = 290   // card width
@@ -151,14 +143,9 @@ function TimelineCard({
 }
 
 export function TimelineSection({ event }: { event: LandingEvent }) {
-  /* Merge DB items with defaults */
-  const dbItems = (event.settings?.timeline ?? []) as TimelineItem[]
-  const items = DEFAULT_ITEMS.map((def, i) => ({
-    time:        dbItems[i]?.time        ?? def.time,
-    title:       dbItems[i]?.title       ?? def.title,
-    description: dbItems[i]?.description ?? def.description,
-    imageUrl:    dbItems[i]?.imageUrl    ?? '',
-  }))
+  const items = (event.settings?.timeline ?? []) as TimelineItem[]
+
+  if (items.length === 0) return null
 
   /* Split into left/right columns */
   const leftItems  = items.filter((_, i) => i % 2 === 0)  // 0,2,4

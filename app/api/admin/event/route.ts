@@ -109,6 +109,7 @@ export async function PATCH(req: NextRequest) {
         emailAddress?: string
         aboutText?: string
         partnerLogoUrl?: string
+        navLogoUrl?: string
         activities?: Prisma.InputJsonValue
         timeline?: Prisma.InputJsonValue
         thingsToKnow?: Prisma.InputJsonValue
@@ -126,8 +127,33 @@ export async function PATCH(req: NextRequest) {
       }
     }
 
-    const { id, settings, ...eventFields } = body
-    if (!id) return Response.json({ error: 'id required' }, { status: 400 })
+    const { id: rawId, settings, ...eventFields } = body
+    let id = rawId
+    if (!id) {
+      const existing = await prisma.event.findFirst({ orderBy: { createdAt: 'desc' } })
+      if (!existing) {
+        const newEvent = await prisma.event.create({
+          data: {
+            ...eventFields,
+            maxCapacity: eventFields.maxCapacity ?? 30,
+            settings: {
+              create: {
+                accentColor:  settings?.accentColor  ?? '#F2BA30',
+                allowPlusOne: settings?.allowPlusOne ?? true,
+                logoUrl:                  settings?.logoUrl,
+                passBackgroundUrl:        settings?.passBackgroundUrl,
+                whatsappTemplateSelected: settings?.whatsappTemplateSelected,
+                whatsappTemplateReminder: settings?.whatsappTemplateReminder,
+                whatsappTemplatePlusOne:  settings?.whatsappTemplatePlusOne,
+              },
+            },
+          },
+          include: { settings: true },
+        })
+        return Response.json({ event: newEvent }, { status: 201 })
+      }
+      id = existing.id
+    }
 
     const event = await prisma.event.update({
       where: { id },

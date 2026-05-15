@@ -39,6 +39,8 @@ model EventSettings {
   emailAddress               String?
   aboutText                  String?
   partnerLogoUrl             String?
+  partnerName                String?
+  navLogoUrl                 String?
   activities                 Json?
   timeline                   Json?
   thingsToKnow               Json?

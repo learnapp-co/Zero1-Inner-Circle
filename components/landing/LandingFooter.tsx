@@ -8,7 +8,7 @@ export function LandingFooter({ event }: { event: LandingEvent }) {
   return (
     <>
       {/* ── Mobile footer ── */}
-      <div className="relative w-full md:hidden" style={{ background: '#0f071a' }}>
+      <div className="relative w-full md:hidden" style={{ background: 'linear-gradient(to bottom, #0f071a 0%, #000000 30%)' }}>
         <div className="flex flex-col items-center" style={{ paddingTop: 50, paddingBottom: 40, gap: 32 }}>
           {/* Zero1 logo */}
           {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -34,7 +34,9 @@ export function LandingFooter({ event }: { event: LandingEvent }) {
       </div>
 
       {/* ── Desktop footer ── */}
-      <div className="relative w-full hidden md:block" style={{ background: '#0f071a', height: 180 }}>
+      <div className="relative w-full hidden md:block" style={{ background: '#000000', height: 180 }}>
+        {/* gradient transition from page bg to black */}
+        <div className="absolute inset-x-0 top-0 pointer-events-none" style={{ height: 80, background: 'linear-gradient(to bottom, #0f071a 0%, #000000 100%)' }} />
         {/* top border line */}
         <div className="absolute" style={{ left: 116, top: 40, width: 1202, borderTop: '2px solid #171717' }} />
         {/* Zero1 logo — left */}

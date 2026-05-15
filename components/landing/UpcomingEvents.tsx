@@ -1,85 +1,95 @@
 import type { LandingEvent } from './types'
-import { ASSET_HERO_IMG2, ASSET_CARD_ICON_DATE, ASSET_CARD_ICON_PASSES, ASSET_INFO_ICON } from './assets'
+import {
+  ASSET_HERO_IMG2, ASSET_CARD_ICON_DATE, ASSET_CARD_ICON_PASSES, ASSET_INFO_ICON,
+} from './assets'
 import { sanitizeUrl } from './sanitizeUrl'
 import { SectionTitle } from './SectionTitle'
 
 /*
  * Figma node 6055:4197 — "Upcoming events" section.
- * Card: 820×457px desktop / full-width mobile.
- * Event name rendered with 3-layer Gilroy ExtraBold shadow (orange → yellow → white).
+ *
+ * Event card: 820×457px desktop / full-width mobile (aspect 820/457).
+ * Gradient: linear-gradient(1.17deg, #0f071a 11.92%, rgba(15,7,26,0.705) 48.79%, transparent 99.48%)
+ *
+ * Title: Gilroy ExtraBold 29.681px, 3-layer stacked via CSS text-shadow:
+ *   - White text on top
+ *   - Gold (#f5bd34) shadow at 0 2px
+ *   - Orange (#f57434) shadow at 0 4px
+ *
+ * Info bar:
+ *   - Positioned at top: 353px (desktop)
+ *   - Icon containers: 74×74px, icon image 44×44px centred
  */
 
-function StackedEventTitle({ name, size }: { name: string; size: 'sm' | 'lg' }) {
-  const fs = size === 'lg' ? 29.681 : 22
-  const offsets = size === 'lg' ? [4, 2, 0] : [3, 1.5, 0]
-  const h = size === 'lg' ? 34 : 26
-  const style: React.CSSProperties = {
-    position: 'absolute', left: 0, top: 0, width: '100%',
-    fontFamily: '"Gilroy-ExtraBold","Gilroy","Satoshi",sans-serif',
-    fontWeight: 800, fontSize: fs, lineHeight: 1.1,
-    textTransform: 'uppercase', whiteSpace: 'nowrap', margin: 0,
-  }
+
+function IconBox({ src, size }: { src: string; size: number }) {
   return (
-    <div style={{ position: 'relative', height: h + offsets[0] }}>
-      <p style={{ ...style, top: offsets[0], color: '#f57434' }}>{name}</p>
-      <p style={{ ...style, top: offsets[1], color: '#f5bd34' }}>{name}</p>
-      <p style={{ ...style, top: offsets[2], color: '#ffffff' }}>{name}</p>
+    <div style={{
+      width: size, height: size,
+      display: 'flex', alignItems: 'center', justifyContent: 'center',
+      flexShrink: 0,
+    }}>
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img alt="" src={src} style={{ width: size === 74 ? 44 : 36, height: size === 74 ? 44 : 36 }} />
     </div>
   )
 }
 
 export function UpcomingEvents({ event }: { event: LandingEvent }) {
   const cardImage = sanitizeUrl(event.settings?.eventCardImageUrl) || ASSET_HERO_IMG2
-  const cardSubtitle = event.settings?.eventCardSubtitle ?? 'Curating the right mix of investments'
 
   return (
     <>
       {/* ── Mobile ── */}
       <div className="w-full md:hidden px-4" style={{ paddingTop: 40 }}>
         <SectionTitle>Upcoming events</SectionTitle>
-        <div className="relative w-full overflow-hidden rounded-2xl" style={{ marginTop: 20, aspectRatio: '820/457' }}>
+
+        <div className="relative w-full overflow-hidden rounded-3xl" style={{ marginTop: 20, aspectRatio: '820/457' }}>
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img alt="" src={cardImage}
+          <img
+            alt="" src={cardImage}
             className="absolute inset-0 w-full h-full object-cover"
-            loading="eager" fetchPriority="high" />
-          {/* Gradient overlay */}
+            loading="eager" fetchPriority="high"
+          />
           <div className="absolute inset-0" style={{
-            background: 'linear-gradient(180deg, rgba(15,7,26,0) 0%, rgba(15,7,26,0.705) 50%, #0f071a 100%)',
+            background: 'linear-gradient(to bottom, rgba(15,7,26,0) 0%, rgba(15,7,26,0.5) 45%, #0f071a 100%)',
           }} />
 
-          {/* Title overlay — top centre */}
-          <div className="absolute flex flex-col items-center" style={{ top: 20, left: 0, right: 0, textAlign: 'center' }}>
-            <p style={{ fontFamily: 'Satoshi,sans-serif', fontWeight: 500, fontStyle: 'italic', fontSize: 12, color: 'rgba(255,255,255,0.5)', letterSpacing: '1px', marginBottom: 6 }}>
-              ACTIVITY 1
-            </p>
-            <div style={{ transform: 'none' }}>
-              <StackedEventTitle name={event.name} size="sm" />
-            </div>
-            <p style={{ fontFamily: 'Satoshi,sans-serif', fontWeight: 400, fontStyle: 'italic', fontSize: 13, color: 'rgba(255,255,255,0.75)', marginTop: 6 }}>
-              {cardSubtitle}
-            </p>
-          </div>
-
           {/* Bottom info bar */}
-          <div className="absolute bottom-0 left-0 right-0 flex items-center justify-between px-4 py-3" style={{ gap: 8 }}>
-            <div className="flex items-center" style={{ gap: 10 }}>
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img alt="" src={ASSET_CARD_ICON_DATE} style={{ width: 44, height: 44, borderRadius: 8, flexShrink: 0 }} />
+          <div className="absolute bottom-0 inset-x-0 flex items-center justify-between" style={{ padding: '0 12px 12px' }}>
+            <div className="flex items-center" style={{ gap: 6 }}>
+              <IconBox src={ASSET_CARD_ICON_DATE} size={44} />
               <div>
-                <p style={{ fontFamily: 'Satoshi,sans-serif', fontWeight: 500, fontSize: 12, lineHeight: 1.4, color: '#fff' }}>{event.date}</p>
-                <div className="flex items-center" style={{ gap: 4 }}>
-                  <p style={{ fontFamily: 'Satoshi,sans-serif', fontWeight: 500, fontSize: 12, color: '#fff' }}>{event.city}</p>
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img alt="" src={ASSET_INFO_ICON} style={{ width: 14, height: 14, opacity: 0.5 }} />
+                <p style={{ fontFamily: 'Satoshi,sans-serif', fontWeight: 500, fontSize: 11, lineHeight: '16px', color: '#fff', margin: 0 }}>{event.date}</p>
+                <div className="flex items-center" style={{ gap: 3 }}>
+                  <p style={{ fontFamily: 'Satoshi,sans-serif', fontWeight: 500, fontSize: 11, color: '#fff', margin: 0 }}>{event.city}</p>
+                  {event.venue && (
+                    <div className="group relative" style={{ display: 'flex', alignItems: 'center' }}>
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
+                      <img alt="" src={ASSET_INFO_ICON} style={{ width: 12, height: 12, opacity: 0.5 }} />
+                      <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap" style={{
+                        background: 'rgba(15,7,26,0.9)',
+                        border: '1px solid rgba(255,255,255,0.12)',
+                        borderRadius: 8,
+                        padding: '5px 10px',
+                        fontFamily: 'Satoshi,sans-serif',
+                        fontWeight: 500,
+                        fontSize: 11,
+                        color: '#fff',
+                        zIndex: 10,
+                      }}>
+                        {event.venue}
+                      </div>
+                    </div>
+                  )}
                 </div>
               </div>
             </div>
-            <div className="flex items-center" style={{ gap: 10 }}>
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img alt="" src={ASSET_CARD_ICON_PASSES} style={{ width: 44, height: 44, borderRadius: 8, flexShrink: 0 }} />
+            <div className="flex items-center" style={{ gap: 6 }}>
+              <IconBox src={ASSET_CARD_ICON_PASSES} size={44} />
               <div>
-                <p style={{ fontFamily: 'Satoshi,sans-serif', fontWeight: 500, fontSize: 12, lineHeight: 1.4, color: '#fff' }}>Only {event.maxCapacity} passes</p>
-                <p style={{ fontFamily: 'Satoshi,sans-serif', fontWeight: 500, fontSize: 12, color: '#fff' }}>{event.price ?? '₹3,000'} + GST (you &amp; your +1)</p>
+                <p style={{ fontFamily: 'Satoshi,sans-serif', fontWeight: 500, fontSize: 11, lineHeight: '16px', color: '#fff', margin: 0 }}>Only {event.maxCapacity} passes</p>
+                <p style={{ fontFamily: 'Satoshi,sans-serif', fontWeight: 500, fontSize: 11, color: '#fff', margin: 0 }}>{event.price ?? '₹3,000'} + GST</p>
               </div>
             </div>
           </div>
@@ -90,51 +100,65 @@ export function UpcomingEvents({ event }: { event: LandingEvent }) {
       <div className="hidden md:flex flex-col items-center" style={{ paddingTop: 80 }}>
         <div style={{ width: 820 }}>
           <SectionTitle>Upcoming events</SectionTitle>
+
+          {/* Card: 820×457 */}
           <div className="relative overflow-hidden rounded-3xl" style={{ marginTop: 24, width: 820, height: 457 }}>
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img alt="" src={cardImage}
+            <img
+              alt="" src={cardImage}
               className="absolute inset-0 w-full h-full object-cover"
-              loading="eager" fetchPriority="high" />
-            {/* Gradient overlay */}
+              loading="eager" fetchPriority="high"
+            />
+            {/* Figma gradient: 1.17deg, dark at bottom fading to transparent at top */}
             <div className="absolute inset-0" style={{
-              background: 'linear-gradient(180deg, rgba(15,7,26,0) 0%, rgba(15,7,26,0.6) 55%, #0f071a 100%)',
+              background: 'linear-gradient(1.17deg, rgb(15,7,26) 11.92%, rgba(15,7,26,0.705) 48.79%, rgba(15,7,26,0) 99.48%)',
             }} />
 
-            {/* Title overlay — top centre */}
-            <div className="absolute flex flex-col items-center" style={{ top: 28, left: '50%', transform: 'translateX(-50%)', textAlign: 'center', width: 420 }}>
-              <p style={{ fontFamily: 'Satoshi,sans-serif', fontWeight: 500, fontStyle: 'italic', fontSize: 14, color: 'rgba(255,255,255,0.5)', letterSpacing: '1.5px', marginBottom: 8 }}>
-                ACTIVITY 1
-              </p>
-              <StackedEventTitle name={event.name} size="lg" />
-              <p style={{ fontFamily: 'Satoshi,sans-serif', fontWeight: 400, fontStyle: 'italic', fontSize: 24, color: '#fff', marginTop: 8 }}>
-                {cardSubtitle}
-              </p>
-            </div>
-
-            {/* Bottom info bar */}
-            <div className="absolute bottom-0 left-0 right-0 flex items-center justify-between" style={{ padding: '0 22px 20px' }}>
+            {/* Info bar — at top: 353px, width 776px centred */}
+            <div className="absolute flex items-center justify-between" style={{
+              top: 353, left: '50%', transform: 'translateX(-50%)', width: 776,
+            }}>
               {/* Date + city */}
-              <div className="flex items-center" style={{ gap: 12 }}>
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img alt="" src={ASSET_CARD_ICON_DATE} style={{ width: 44, height: 44, borderRadius: 10, flexShrink: 0 }} />
-                <div>
-                  <p style={{ fontFamily: 'Satoshi,sans-serif', fontWeight: 500, fontSize: 16, lineHeight: 1.4, color: '#fff' }}>
+              <div className="flex items-center" style={{ gap: 0 }}>
+                <IconBox src={ASSET_CARD_ICON_DATE} size={74} />
+                <div style={{ display: 'flex', flexDirection: 'column', gap: 8, width: 344 }}>
+                  <p style={{ fontFamily: 'Satoshi,sans-serif', fontWeight: 500, fontSize: 16, lineHeight: '24px', color: '#fff', margin: 0 }}>
                     {event.date}{event.time ? `, [${event.time}]` : ''}
                   </p>
-                  <div className="flex items-center" style={{ gap: 6 }}>
-                    <p style={{ fontFamily: 'Satoshi,sans-serif', fontWeight: 500, fontSize: 16, color: '#fff' }}>{event.city}</p>
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img alt="" src={ASSET_INFO_ICON} style={{ width: 24, height: 24, opacity: 0.6 }} />
+                  <div className="flex items-center" style={{ gap: 4 }}>
+                    <p style={{ fontFamily: 'Satoshi,sans-serif', fontWeight: 500, fontSize: 16, color: '#fff', margin: 0 }}>{event.city}</p>
+                    {event.venue && (
+                      <div className="group relative" style={{ display: 'flex', alignItems: 'center' }}>
+                        {/* eslint-disable-next-line @next/next/no-img-element */}
+                        <img alt="" src={ASSET_INFO_ICON} style={{ width: 24, height: 24 }} />
+                        <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap" style={{
+                          background: 'rgba(15,7,26,0.9)',
+                          border: '1px solid rgba(255,255,255,0.12)',
+                          borderRadius: 8,
+                          padding: '6px 14px',
+                          fontFamily: 'Satoshi,sans-serif',
+                          fontWeight: 500,
+                          fontSize: 13,
+                          color: '#fff',
+                          zIndex: 10,
+                        }}>
+                          {event.venue}
+                        </div>
+                      </div>
+                    )}
                   </div>
                 </div>
               </div>
               {/* Passes + price */}
-              <div className="flex items-center" style={{ gap: 12 }}>
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img alt="" src={ASSET_CARD_ICON_PASSES} style={{ width: 44, height: 44, borderRadius: 10, flexShrink: 0 }} />
-                <div>
-                  <p style={{ fontFamily: 'Satoshi,sans-serif', fontWeight: 500, fontSize: 16, lineHeight: 1.4, color: '#fff' }}>Only {event.maxCapacity} passes</p>
-                  <p style={{ fontFamily: 'Satoshi,sans-serif', fontWeight: 500, fontSize: 16, color: '#fff' }}>{event.price ?? '₹3,000'} + GST (you &amp; your +1)</p>
+              <div className="flex items-center" style={{ gap: 0, width: 297 }}>
+                <IconBox src={ASSET_CARD_ICON_PASSES} size={74} />
+                <div style={{ display: 'flex', flexDirection: 'column', gap: 8, width: 240 }}>
+                  <p style={{ fontFamily: 'Satoshi,sans-serif', fontWeight: 500, fontSize: 16, lineHeight: '24px', color: '#fff', margin: 0 }}>
+                    Only <strong>{event.maxCapacity}</strong> passes
+                  </p>
+                  <p style={{ fontFamily: 'Satoshi,sans-serif', fontWeight: 500, fontSize: 16, color: '#fff', margin: 0 }}>
+                    {event.price ?? '₹3,000'} + GST (you &amp; your +1)
+                  </p>
                 </div>
               </div>
             </div>

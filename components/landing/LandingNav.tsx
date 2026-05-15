@@ -23,7 +23,7 @@ export function LandingNav({ event }: { event: LandingEvent }) {
         borderRadius: 16,
       }}
     >
-      <img alt="Zero1" src={ASSET_ZERO1_LOGO_NAV} style={{ width: 119, height: 36 }} />
+      <img alt="Zero1" src={event.settings?.navLogoUrl || ASSET_ZERO1_LOGO_NAV} style={{ width: 119, height: 36 }} />
 
       <a
         href={missionUrl}

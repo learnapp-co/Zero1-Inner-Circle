@@ -20,6 +20,8 @@ export type EventSettings = {
   emailAddress: string | null
   aboutText: string | null
   partnerLogoUrl: string | null
+  partnerName: string | null
+  navLogoUrl: string | null
   activities: ActivityItem[] | null
   timeline: TimelineItem[] | null
   thingsToKnow: string[] | null

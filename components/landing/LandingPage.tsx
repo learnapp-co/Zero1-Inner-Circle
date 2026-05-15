@@ -3,7 +3,6 @@ import { LandingNav } from './LandingNav'
 import { HeroSection } from './HeroSection'
 import { UpcomingEvents } from './UpcomingEvents'
 import { AboutSection } from './AboutSection'
-import { ShowMoreWrapper } from './ShowMoreWrapper'
 import { ActivitiesGrid } from './ActivitiesGrid'
 import { TimelineSection } from './TimelineSection'
 import { SelectionCriteria } from './SelectionCriteria'
@@ -13,110 +12,97 @@ import { LandingFooter } from './LandingFooter'
 import { MissionBar } from './MissionBar'
 
 /*
- * Desktop layout — centered, 1440px canvas.
+ * Full expanded landing page — Figma node 6055:4051 (1440×6209px).
+ * Renders every section, fully visible (no collapse).
+ * Collapsed/show-more behaviour will be added separately once this is approved.
  *
- * Section widths from Figma 6055:4051:
- *   Nav: 1044px (sticky, 26px from top)
+ * Desktop section widths (from Figma):
+ *   Nav bar: 1044px
  *   Hero: full bleed
  *   Upcoming Events card: 820px
  *   About: 820px
- *   Skills: 820px
- *   Flow of the Event (timeline): 760px
+ *   Skills you'll learn: 820px
+ *   Flow of the Event: 760px (with left/right card cols)
  *   Selection Process: 841px
  *   Things to Know: 841px
  *   Donation: 841px
  *   Footer: full width
- *
- * Vertical spacing (from Figma y-positions):
- *   Hero → Upcoming Events: paddingTop 80px on Upcoming
- *   Upcoming Events → About: paddingTop 80px on About
- *   Each expanded section: paddingTop 100px
  */
 export function LandingPage({ event }: { event: LandingEvent }) {
   return (
-    <div className="min-h-screen" style={{ fontFamily: 'Satoshi, sans-serif', background: '#0f071a' }}>
+    <div className="min-h-screen" style={{ background: '#0f071a' }}>
 
-      {/* Sticky desktop nav */}
+      {/* ── Sticky desktop nav ── */}
       <LandingNav event={event} />
 
-      {/* Hero — full bleed */}
+      {/* ── Hero — full bleed ── */}
       <HeroSection event={event} />
 
-      {/* ══════════════════ MOBILE LAYOUT ══════════════════ */}
-      <div className="md:hidden w-full" style={{ maxWidth: 430, margin: '0 auto' }}>
+      {/* ══════════════════════ MOBILE ══════════════════════ */}
+      <div className="md:hidden w-full">
 
-        {/* Upcoming event card */}
         <UpcomingEvents event={event} />
 
-        {/* About intro */}
         <div className="px-4" style={{ paddingTop: 48 }}>
           <AboutSection event={event} />
         </div>
 
-        {/* Show more toggle + expanded content */}
-        <ShowMoreWrapper>
-          <div className="flex flex-col">
-            <ActivitiesGrid event={event} />
-            <TimelineSection event={event} />
-            <div className="px-4">
-              <SelectionCriteria event={event} />
-            </div>
-            <div style={{ height: 60 }} />
-            <div className="px-4">
-              <ThingsToKnow event={event} />
-            </div>
-            <DonationSection event={event} />
-          </div>
-        </ShowMoreWrapper>
+        <div style={{ height: 60 }} />
+        <ActivitiesGrid event={event} />
+
+        <TimelineSection event={event} />
+
+        <div style={{ paddingTop: 60 }}>
+          <SelectionCriteria event={event} />
+        </div>
+
+        <div style={{ paddingTop: 60 }}>
+          <ThingsToKnow event={event} />
+        </div>
+
+        <DonationSection event={event} />
 
       </div>
 
-      {/* ══════════════════ DESKTOP LAYOUT ══════════════════ */}
+      {/* ══════════════════════ DESKTOP ══════════════════════ */}
       <div className="hidden md:flex flex-col items-center w-full">
 
-        {/* Upcoming Events — 820px card */}
+        {/* Upcoming Events — 820px centered */}
         <UpcomingEvents event={event} />
 
-        {/* About the event — 820px wide, centered */}
+        {/* About the event — 820px */}
         <div style={{ width: 820, paddingTop: 80 }}>
           <AboutSection event={event} />
         </div>
 
-        {/* Show more / Show less + expanded sections */}
-        <ShowMoreWrapper>
-          <div className="flex flex-col items-center w-full">
+        {/* Skills you'll learn — 820px */}
+        <div style={{ width: 820, paddingTop: 100 }}>
+          <ActivitiesGrid event={event} />
+        </div>
 
-            {/* Skills you'll learn — up to 820px */}
-            <div style={{ width: '100%', paddingTop: 80 }}>
-              <ActivitiesGrid event={event} />
-            </div>
+        {/* Flow of the Event — 760px zig-zag */}
+        <TimelineSection event={event} />
 
-            {/* Flow of the Event — 760px */}
-            <TimelineSection event={event} />
+        {/* Selection Process — 841px */}
+        <div style={{ width: 841, paddingTop: 100 }}>
+          <SelectionCriteria event={event} />
+        </div>
 
-            {/* Selection Process — 841px */}
-            <div className="flex flex-col items-center" style={{ paddingTop: 100, width: 841 }}>
-              <SelectionCriteria event={event} />
-            </div>
+        {/* Things to Know — 841px */}
+        <div style={{ width: 841, paddingTop: 100 }}>
+          <ThingsToKnow event={event} />
+        </div>
 
-            {/* Things to Know — 841px */}
-            <div className="flex flex-col items-center" style={{ paddingTop: 100, width: 841 }}>
-              <ThingsToKnow event={event} />
-            </div>
-
-            {/* Donation */}
-            <DonationSection event={event} />
-
-          </div>
-        </ShowMoreWrapper>
+        {/* Donation */}
+        <DonationSection event={event} />
 
         <div style={{ height: 80 }} />
       </div>
 
-      {/* Footer — always visible */}
+      {/* ── Footer — always visible ── */}
       <LandingFooter event={event} />
 
-      {/* Mobile sticky CTA bar */}
+      {/* ── Mobile sticky CTA ── */}
       <MissionBar event={event} />
       <div className="md:hidden" style={{ height: 104 }} />
     </div>

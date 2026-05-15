@@ -16,8 +16,11 @@ type EventForm = {
   settings: {
     accentColor: string
     allowPlusOne: boolean
+    navLogoUrl: string
     logoUrl: string
     passBackgroundUrl: string
+    partnerName: string
+    partnerLogoUrl: string
     whatsappTemplateSelected: string
     whatsappTemplateReminder: string
     whatsappTemplatePlusOne: string
@@ -37,8 +40,11 @@ const DEFAULTS: EventForm = {
   settings: {
     accentColor: '#F2BA30',
     allowPlusOne: true,
+    navLogoUrl: '',
     logoUrl: '',
     passBackgroundUrl: '',
+    partnerName: '',
+    partnerLogoUrl: '',
     whatsappTemplateSelected: '',
     whatsappTemplateReminder: '',
     whatsappTemplatePlusOne: '',
@@ -46,18 +52,19 @@ const DEFAULTS: EventForm = {
 }
 
 export default function SettingsPage() {
-  const [form, setForm]       = useState<EventForm>(DEFAULTS)
-  const [loading, setLoading] = useState(true)
-  const [noEvent, setNoEvent] = useState(false)
-  const [saving, setSaving]   = useState(false)
-  const [saved, setSaved]     = useState(false)
-  const [error, setError]     = useState<string | null>(null)
+  const [form, setForm]         = useState<EventForm>(DEFAULTS)
+  const [loading, setLoading]   = useState(true)
+  const [noEvent, setNoEvent]   = useState(false)
+  const [loadWarn, setLoadWarn] = useState(false)
+  const [saving, setSaving]     = useState(false)
+  const [saved, setSaved]       = useState(false)
+  const [error, setError]       = useState<string | null>(null)
 
   useEffect(() => {
     async function load() {
       try {
         const res = await fetch('/api/admin/event')
-        if (!res.ok) { setLoading(false); return }
+        if (!res.ok) { setLoadWarn(true); setLoading(false); return }
         const { event } = await res.json()
         if (!event) {
           setNoEvent(true)
@@ -77,8 +84,11 @@ export default function SettingsPage() {
             settings: {
               accentColor:              s?.accentColor              ?? '#F2BA30',
               allowPlusOne:             s?.allowPlusOne             ?? true,
+              navLogoUrl:               s?.navLogoUrl               ?? '',
               logoUrl:                  s?.logoUrl                  ?? '',
               passBackgroundUrl:        s?.passBackgroundUrl        ?? '',
+              partnerName:              s?.partnerName              ?? '',
+              partnerLogoUrl:           s?.partnerLogoUrl           ?? '',
               whatsappTemplateSelected: s?.whatsappTemplateSelected ?? '',
               whatsappTemplateReminder: s?.whatsappTemplateReminder ?? '',
               whatsappTemplatePlusOne:  s?.whatsappTemplatePlusOne  ?? '',
@@ -118,8 +128,11 @@ export default function SettingsPage() {
       settings: {
         accentColor:              form.settings.accentColor,
         allowPlusOne:             form.settings.allowPlusOne,
+        navLogoUrl:               form.settings.navLogoUrl               || undefined,
         logoUrl:                  form.settings.logoUrl                  || undefined,
         passBackgroundUrl:        form.settings.passBackgroundUrl        || undefined,
+        partnerName:              form.settings.partnerName              || undefined,
+        partnerLogoUrl:           form.settings.partnerLogoUrl           || undefined,
         whatsappTemplateSelected: form.settings.whatsappTemplateSelected || undefined,
         whatsappTemplateReminder: form.settings.whatsappTemplateReminder || undefined,
         whatsappTemplatePlusOne:  form.settings.whatsappTemplatePlusOne  || undefined,
@@ -128,9 +141,9 @@ export default function SettingsPage() {
 
     try {
       const res = await fetch('/api/admin/event', {
-        method:  noEvent ? 'POST' : 'PATCH',
+        method:  'PATCH',
         headers: { 'Content-Type': 'application/json' },
-        body:    JSON.stringify(noEvent ? payload : { id: form.id, ...payload }),
+        body:    JSON.stringify(form.id ? { id: form.id, ...payload } : payload),
       })
 
       if (!res.ok) {
@@ -184,6 +197,12 @@ export default function SettingsPage() {
           </Link>
         </div>
       )}
+      {loadWarn && (
+        <div className="mb-6 rounded-xl px-4 py-3 text-sm"
+          style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid var(--border)', color: 'var(--muted)' }}>
+          Could not load current settings — your save will still work.
+        </div>
+      )}
 
       <form onSubmit={handleSave} className="space-y-6">
         {/* Event details */}
@@ -221,6 +240,10 @@ export default function SettingsPage() {
             <Input value={form.heroImageUrl} onChange={v => set('heroImageUrl', v)}
               placeholder="https://…/hero.jpg" />
           </Field>
+          <Field label="Nav Logo URL" hint="Overrides the Zero1 logo shown in the landing page navigation">
+            <Input value={form.settings.navLogoUrl} onChange={v => setSetting('navLogoUrl', v)}
+              placeholder="https://…/logo.png" />
+          </Field>
           <Field label="Pass Logo URL">
             <Input value={form.settings.logoUrl} onChange={v => setSetting('logoUrl', v)}
               placeholder="https://…/logo.png" />
@@ -238,6 +261,18 @@ export default function SettingsPage() {
               <Input value={form.settings.accentColor} onChange={v => setSetting('accentColor', v)}
                 placeholder="#F2BA30" />
             </div>
+          </Field>
+        </Section>
+
+        {/* Partner */}
+        <Section title="Partnership">
+          <Field label="Partner Name" hint="Shown as text fallback if no logo URL is set (e.g. Roastery Coffee)">
+            <Input value={form.settings.partnerName} onChange={v => setSetting('partnerName', v)}
+              placeholder="Roastery Coffee" />
+          </Field>
+          <Field label="Partner Logo URL" hint="Upload logo to Supabase/Cloudinary and paste the URL here — overrides the text above">
+            <Input value={form.settings.partnerLogoUrl} onChange={v => setSetting('partnerLogoUrl', v)}
+              placeholder="https://…/partner-logo.png" />
           </Field>
         </Section>
 
@@ -296,14 +331,10 @@ export default function SettingsPage() {
           <button type="submit" disabled={saving}
             className="px-6 py-3 rounded-lg text-black font-semibold text-sm disabled:opacity-50"
             style={{ background: 'var(--accent)' }}>
-            {saving
-              ? (noEvent ? 'Creating…' : 'Saving…')
-              : (noEvent ? 'Create Event' : 'Save Settings')}
+            {saving ? 'Saving…' : (noEvent ? 'Create Event' : 'Save Settings')}
           </button>
           {saved && (
-            <span className="text-sm text-green-400">
-              {noEvent ? 'Event created ✓' : 'Saved ✓'}
-            </span>
+            <span className="text-sm text-green-400">Saved ✓</span>
           )}
         </div>
       </form>
