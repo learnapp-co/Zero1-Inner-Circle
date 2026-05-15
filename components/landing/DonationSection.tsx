@@ -58,14 +58,14 @@ export function DonationSection({ event }: { event: LandingEvent }) {
 
         {/* In partnership with */}
         <div className="flex flex-col items-center" style={{ marginTop: 36, gap: 120 }}>
-          <p style={{ fontFamily: 'Satisfy,cursive', fontWeight: 400, fontSize: 16, color: '#98969d', letterSpacing: '0.32px', margin: 0 }}>
+          <p style={{ fontFamily: 'Inter,sans-serif', fontWeight: 400, fontSize: 16, color: '#98969d', letterSpacing: '0.32px', margin: 0 }}>
             In partnership with
           </p>
           {partnerLogo ? (
             // eslint-disable-next-line @next/next/no-img-element
             <img alt="Partner" src={partnerLogo} style={{ width: 210, height: 40, objectFit: 'contain' }} />
           ) : (
-            <p style={{ fontFamily: '"Georgia",serif', fontWeight: 400, fontSize: 22, letterSpacing: '0.15em', color: '#fff', opacity: 0.3, margin: 0, textTransform: 'uppercase', textAlign: 'center' }}>
+            <p style={{ fontFamily: '"Inter,sans-serif', fontWeight: 400, fontSize: 22, letterSpacing: '0.15em', color: '#fff', opacity: 0.3, margin: 0, textTransform: 'uppercase', textAlign: 'center' }}>
               {partnerName}
             </p>
           )}
@@ -104,14 +104,14 @@ export function DonationSection({ event }: { event: LandingEvent }) {
 
           {/* In partnership with — Satisfy 20px, #98969d, centred */}
           <div className="flex flex-col items-center" style={{ marginTop: 120, gap: 27 }}>
-            <p style={{ fontFamily: 'Satisfy,cursive', fontWeight: 400, fontSize: 20, color: '#98969d', letterSpacing: '0.4px', margin: 0, textAlign: 'center' }}>
+            <p style={{ fontFamily: 'Inter,sans-serif', fontWeight: 400, fontSize: 20, color: '#98969d', letterSpacing: '0.4px', margin: 0, textAlign: 'center' }}>
               In partnership with
             </p>
             {partnerLogo ? (
               // eslint-disable-next-line @next/next/no-img-element
               <img alt="Partner" src={partnerLogo} style={{ width: 420, height: 54, objectFit: 'contain' }} />
             ) : (
-              <p style={{ fontFamily: '"Georgia",serif', fontWeight: 400, fontSize: 36, letterSpacing: '0.15em', color: '#fff', opacity: 0.3, margin: 0, textTransform: 'uppercase', textAlign: 'center' }}>
+              <p style={{ fontFamily: '"Inter,sans-serif', fontWeight: 400, fontSize: 36, letterSpacing: '0.15em', color: '#fff', opacity: 0.3, margin: 0, textTransform: 'uppercase', textAlign: 'center' }}>
                 {partnerName}
               </p>
             )}

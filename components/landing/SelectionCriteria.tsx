@@ -61,8 +61,8 @@ export function SelectionCriteria({ event }: { event: LandingEvent }) {
               </div>
               {/* Text */}
               <div style={{ flex: 1, paddingBottom: i < steps.length - 1 ? 24 : 0 }}>
-                <p style={{ fontFamily: 'Satoshi,sans-serif', fontWeight: 700, fontSize: 14, lineHeight: '20px', color: '#fff', marginBottom: 4 }}>{step.title}</p>
-                <p style={{ fontFamily: 'Satoshi,sans-serif', fontWeight: 400, fontSize: 12, lineHeight: '20px', color: '#807d85' }}>{step.body}</p>
+                <p style={{ fontFamily: 'Inter,sans-serif', fontWeight: 700, fontSize: 14, lineHeight: '20px', color: '#fff', marginBottom: 4 }}>{step.title}</p>
+                <p style={{ fontFamily: 'Inter,sans-serif', fontWeight: 400, fontSize: 12, lineHeight: '20px', color: '#807d85' }}>{step.body}</p>
               </div>
             </div>
           ))}
@@ -70,7 +70,7 @@ export function SelectionCriteria({ event }: { event: LandingEvent }) {
         <a href={missionUrl} target="_blank" rel="noopener noreferrer"
           className="flex items-center justify-center rounded-lg"
           style={{ width: '100%', padding: '14px 8px', background: '#f5bd34' }}>
-          <span style={{ fontFamily: 'Satoshi,sans-serif', fontWeight: 500, fontSize: 14, color: '#000' }}>Start mission</span>
+          <span style={{ fontFamily: 'Inter,sans-serif', fontWeight: 500, fontSize: 14, color: '#000' }}>Start mission</span>
         </a>
       </div>
 
@@ -93,8 +93,8 @@ export function SelectionCriteria({ event }: { event: LandingEvent }) {
               </div>
               {/* Text */}
               <div style={{ flex: 1, paddingBottom: i < steps.length - 1 ? 32 : 0 }}>
-                <p style={{ fontFamily: 'Satoshi,sans-serif', fontWeight: 700, fontSize: 18, lineHeight: '24px', color: '#fff', marginBottom: 6 }}>{step.title}</p>
-                <p style={{ fontFamily: 'Satoshi,sans-serif', fontWeight: 400, fontSize: 16, lineHeight: '24px', color: '#807d85' }}>{step.body}</p>
+                <p style={{ fontFamily: 'Inter,sans-serif', fontWeight: 700, fontSize: 18, lineHeight: '24px', color: '#fff', marginBottom: 6 }}>{step.title}</p>
+                <p style={{ fontFamily: 'Inter,sans-serif', fontWeight: 400, fontSize: 16, lineHeight: '24px', color: '#807d85' }}>{step.body}</p>
               </div>
             </div>
           ))}
@@ -103,7 +103,7 @@ export function SelectionCriteria({ event }: { event: LandingEvent }) {
         <a href={missionUrl} target="_blank" rel="noopener noreferrer"
           className="flex items-center justify-center rounded-lg"
           style={{ width: '100%', height: 53, background: '#f5bd34' }}>
-          <span style={{ fontFamily: 'Satoshi,sans-serif', fontWeight: 500, fontSize: 18, color: '#000' }}>Start mission</span>
+          <span style={{ fontFamily: 'Inter,sans-serif', fontWeight: 500, fontSize: 18, color: '#000' }}>Start mission</span>
         </a>
       </div>
     </>

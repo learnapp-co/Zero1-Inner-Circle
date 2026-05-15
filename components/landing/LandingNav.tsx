@@ -34,7 +34,7 @@ export function LandingNav({ event }: { event: LandingEvent }) {
         className="flex items-center justify-center rounded-lg"
         style={{ width: 205, height: 53, background: '#f5bd34', border: '1px solid #f5bd34' }}
       >
-        <span style={{ fontFamily: 'Satoshi,sans-serif', fontWeight: 500, fontSize: 18, color: '#000' }}>
+        <span style={{ fontFamily: 'Inter,sans-serif', fontWeight: 500, fontSize: 18, color: '#000' }}>
           Start your mission
         </span>
       </a>

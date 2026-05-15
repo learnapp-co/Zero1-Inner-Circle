@@ -38,7 +38,7 @@ export function ShowMoreWrapper({ children }: { children: React.ReactNode }) {
           className="relative flex items-center z-10"
           style={{
             gap: 8,
-            fontFamily: 'Satoshi,sans-serif',
+            fontFamily: 'Inter,sans-serif',
             fontWeight: 400,
             fontSize: 18,
             lineHeight: '24px',

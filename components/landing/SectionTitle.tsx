@@ -49,7 +49,7 @@ export function SectionTitle({ children }: Props) {
       <div className="flex items-center justify-center w-full md:hidden" style={{ gap: 6 }}>
         <LineDiamond />
         <p className="shrink-0 whitespace-nowrap text-white uppercase"
-          style={{ fontFamily: 'Satoshi, sans-serif', fontWeight: 700, fontSize: 12, lineHeight: 'normal', letterSpacing: '2.28px' }}>
+          style={{ fontFamily: 'Inter, sans-serif', fontWeight: 700, fontSize: 12, lineHeight: 'normal', letterSpacing: '2.28px' }}>
           {children}
         </p>
         <LineDiamond flip />
@@ -58,7 +58,7 @@ export function SectionTitle({ children }: Props) {
       <div className="hidden md:flex items-center justify-center w-full" style={{ gap: 8 }}>
         <LineDiamond large />
         <p className="shrink-0 whitespace-nowrap text-white uppercase"
-          style={{ fontFamily: 'Satoshi, sans-serif', fontWeight: 700, fontSize: 28, lineHeight: 'normal', letterSpacing: '5.32px' }}>
+          style={{ fontFamily: 'Inter, sans-serif', fontWeight: 700, fontSize: 28, lineHeight: 'normal', letterSpacing: '5.32px' }}>
           {children}
         </p>
         <LineDiamond large flip />

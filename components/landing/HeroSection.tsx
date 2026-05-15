@@ -63,14 +63,15 @@ export function HeroSection({ event }: { event: LandingEvent }) {
           {/* "Zero1 presents" + wordmark + subtitle */}
           <div className="flex flex-col items-center w-full" style={{ gap: 12 }}>
             <div className="flex items-center justify-center" style={{ gap: 2 }}>
-              <img alt="Zero1" src={BOLT_MOBILE} style={{ height: 13.29, width: 64.8 }} />
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img alt="Zero1" src={BOLT_MOBILE} style={{ width: 72, height: 22 }} />
               <p className="text-white whitespace-nowrap" style={{ fontFamily: '"Instrument Serif",serif', fontStyle: 'italic', fontSize: 16, lineHeight: 1 }}>
                 presents
               </p>
             </div>
             <div className="flex flex-col items-center w-full" style={{ gap: 8 }}>
               <img alt="The Inner Circle" src={WORDMARK_MOBILE} style={{ height: 23.98, width: 176.27, display: 'block' }} />
-              <p className="text-center w-full" style={{ fontFamily: 'Satoshi,sans-serif', fontWeight: 500, fontStyle: 'italic', fontSize: 14, lineHeight: '20px', color: '#fff' }}>
+              <p className="text-center w-full" style={{ fontFamily: 'Inter,sans-serif', fontWeight: 500, fontStyle: 'italic', fontSize: 14, lineHeight: '20px', color: '#fff' }}>
                 {subtitle}
               </p>
             </div>
@@ -80,7 +81,7 @@ export function HeroSection({ event }: { event: LandingEvent }) {
             {bullets.map((b, i) => (
               <li key={i} className="flex items-start" style={{ gap: 8 }}>
                 <span style={{ color: '#f2ba30', fontSize: 10, marginTop: 5, flexShrink: 0 }}>◆</span>
-                <span style={{ fontFamily: 'Satoshi,sans-serif', fontWeight: 400, fontSize: 12, lineHeight: '20px', color: '#b7b5bb' }}>{b}</span>
+                <span style={{ fontFamily: 'Inter,sans-serif', fontWeight: 400, fontSize: 12, lineHeight: '20px', color: '#b7b5bb' }}>{b}</span>
               </li>
             ))}
           </ul>
@@ -112,7 +113,8 @@ export function HeroSection({ event }: { event: LandingEvent }) {
         <div className="absolute flex flex-col items-center" style={{ top: 346, left: '50%', transform: 'translateX(-50%)', gap: 24, width: 708 }}>
           {/* "Zero1 presents" row */}
           <div className="flex items-center justify-center" style={{ gap: 4 }}>
-            <img alt="Zero1" src={BOLT_MOBILE} style={{ height: 29.54, width: 144.06 }} />
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img alt="Zero1" src={BOLT_MOBILE} style={{ width: 119, height: 36 }} />
             <p className="text-white whitespace-nowrap" style={{ fontFamily: '"Instrument Serif",serif', fontStyle: 'italic', fontSize: 35.5, lineHeight: 1 }}>
               presents
             </p>
@@ -129,7 +131,7 @@ export function HeroSection({ event }: { event: LandingEvent }) {
             {/* Bullet list */}
             <ul style={{ listStyleType: 'disc', margin: 0, padding: 0 }}>
               {bullets.map((b, i) => (
-                <li key={i} style={{ marginInlineStart: 24, fontFamily: 'Satoshi,sans-serif', fontWeight: 400, fontSize: 16, lineHeight: '24px', color: '#b7b5bb', whiteSpace: 'nowrap' }}>
+                <li key={i} style={{ marginInlineStart: 24, fontFamily: 'Inter,sans-serif', fontWeight: 400, fontSize: 16, lineHeight: '24px', color: '#b7b5bb', whiteSpace: 'nowrap' }}>
                   {b}
                 </li>
               ))}

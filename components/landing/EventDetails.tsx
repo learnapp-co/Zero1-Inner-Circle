@@ -27,7 +27,7 @@ function IconCircle({ src, innerSrc, innerSize = 20, innerOffset = 6 }: {
 }
 
 export function EventDetails({ event }: { event: LandingEvent }) {
-  const S = { fontFamily: 'Satoshi,sans-serif', fontWeight: 500, color: '#fff' }
+  const S = { fontFamily: 'Inter,sans-serif', fontWeight: 500, color: '#fff' }
   const M = { ...S, fontSize: 14, lineHeight: '16px' }
   const D = { ...S, fontSize: 18, lineHeight: '24px' }
   const DIM = { ...D, color: '#807d85' }

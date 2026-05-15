@@ -61,9 +61,9 @@ export function UpcomingEvents({ event }: { event: LandingEvent }) {
             <div className="flex items-center" style={{ gap: 6 }}>
               <IconBox src={ASSET_CARD_ICON_DATE} size={44} />
               <div>
-                <p style={{ fontFamily: 'Satoshi,sans-serif', fontWeight: 500, fontSize: 11, lineHeight: '16px', color: '#fff', margin: 0 }}>{event.date}</p>
+                <p style={{ fontFamily: 'Inter,sans-serif', fontWeight: 500, fontSize: 11, lineHeight: '16px', color: '#fff', margin: 0 }}>{event.date}</p>
                 <div className="flex items-center" style={{ gap: 3 }}>
-                  <p style={{ fontFamily: 'Satoshi,sans-serif', fontWeight: 500, fontSize: 11, color: '#fff', margin: 0 }}>{event.city}</p>
+                  <p style={{ fontFamily: 'Inter,sans-serif', fontWeight: 500, fontSize: 11, color: '#fff', margin: 0 }}>{event.city}</p>
                   {event.venue && (
                     <div className="group relative" style={{ display: 'flex', alignItems: 'center' }}>
                       {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -73,7 +73,7 @@ export function UpcomingEvents({ event }: { event: LandingEvent }) {
                         border: '1px solid rgba(255,255,255,0.12)',
                         borderRadius: 8,
                         padding: '5px 10px',
-                        fontFamily: 'Satoshi,sans-serif',
+                        fontFamily: 'Inter,sans-serif',
                         fontWeight: 500,
                         fontSize: 11,
                         color: '#fff',
@@ -89,8 +89,8 @@ export function UpcomingEvents({ event }: { event: LandingEvent }) {
             <div className="flex items-center" style={{ gap: 6 }}>
               <IconBox src={ASSET_CARD_ICON_PASSES} size={44} />
               <div>
-                <p style={{ fontFamily: 'Satoshi,sans-serif', fontWeight: 500, fontSize: 11, lineHeight: '16px', color: '#fff', margin: 0 }}>Only {event.maxCapacity} passes</p>
-                <p style={{ fontFamily: 'Satoshi,sans-serif', fontWeight: 500, fontSize: 11, color: '#fff', margin: 0 }}>{event.price ?? '₹3,000'} + GST</p>
+                <p style={{ fontFamily: 'Inter,sans-serif', fontWeight: 500, fontSize: 11, lineHeight: '16px', color: '#fff', margin: 0 }}>Only {event.maxCapacity} passes</p>
+                <p style={{ fontFamily: 'Inter,sans-serif', fontWeight: 500, fontSize: 11, color: '#fff', margin: 0 }}>{event.price ?? '₹3,000'} + GST</p>
               </div>
             </div>
           </div>
@@ -124,11 +124,11 @@ export function UpcomingEvents({ event }: { event: LandingEvent }) {
               <div className="flex items-center" style={{ gap: 0 }}>
                 <IconBox src={ASSET_CARD_ICON_DATE} size={74} />
                 <div style={{ display: 'flex', flexDirection: 'column', gap: 8, width: 344 }}>
-                  <p style={{ fontFamily: 'Satoshi,sans-serif', fontWeight: 500, fontSize: 16, lineHeight: '24px', color: '#fff', margin: 0 }}>
+                  <p style={{ fontFamily: 'Inter,sans-serif', fontWeight: 500, fontSize: 16, lineHeight: '24px', color: '#fff', margin: 0 }}>
                     {event.date}{event.time ? `, [${event.time}]` : ''}
                   </p>
                   <div className="flex items-center" style={{ gap: 4 }}>
-                    <p style={{ fontFamily: 'Satoshi,sans-serif', fontWeight: 500, fontSize: 16, color: '#fff', margin: 0 }}>{event.city}</p>
+                    <p style={{ fontFamily: 'Inter,sans-serif', fontWeight: 500, fontSize: 16, color: '#fff', margin: 0 }}>{event.city}</p>
                     {event.venue && (
                       <div className="group relative" style={{ display: 'flex', alignItems: 'center' }}>
                         {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -138,7 +138,7 @@ export function UpcomingEvents({ event }: { event: LandingEvent }) {
                           border: '1px solid rgba(255,255,255,0.12)',
                           borderRadius: 8,
                           padding: '6px 14px',
-                          fontFamily: 'Satoshi,sans-serif',
+                          fontFamily: 'Inter,sans-serif',
                           fontWeight: 500,
                           fontSize: 13,
                           color: '#fff',
@@ -155,10 +155,10 @@ export function UpcomingEvents({ event }: { event: LandingEvent }) {
               <div className="flex items-center" style={{ gap: 0, width: 297 }}>
                 <IconBox src={ASSET_CARD_ICON_PASSES} size={74} />
                 <div style={{ display: 'flex', flexDirection: 'column', gap: 8, width: 240 }}>
-                  <p style={{ fontFamily: 'Satoshi,sans-serif', fontWeight: 500, fontSize: 16, lineHeight: '24px', color: '#fff', margin: 0 }}>
+                  <p style={{ fontFamily: 'Inter,sans-serif', fontWeight: 500, fontSize: 16, lineHeight: '24px', color: '#fff', margin: 0 }}>
                     Only <strong>{event.maxCapacity}</strong> passes
                   </p>
-                  <p style={{ fontFamily: 'Satoshi,sans-serif', fontWeight: 500, fontSize: 16, color: '#fff', margin: 0 }}>
+                  <p style={{ fontFamily: 'Inter,sans-serif', fontWeight: 500, fontSize: 16, color: '#fff', margin: 0 }}>
                     {event.price ?? '₹3,000'} + GST (you &amp; your +1)
                   </p>
                 </div>

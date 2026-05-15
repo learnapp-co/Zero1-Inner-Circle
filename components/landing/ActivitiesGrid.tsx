@@ -57,14 +57,14 @@ function ActivityCard({ item, desktop }: { item: ActivityItem; desktop?: boolean
       <img alt="" src={iconSrc} style={{ width: desktop ? 28 : 24, height: desktop ? 28 : 24 }} />
       <div className="flex flex-col" style={{ gap: 8 }}>
         <p style={{
-          fontFamily: 'Satoshi,sans-serif', fontWeight: 500,
+          fontFamily: 'Inter,sans-serif', fontWeight: 500,
           fontSize: desktop ? 18 : 14, lineHeight: '24px',
           color: '#fff', margin: 0,
         }}>
           {item.title}
         </p>
         <p style={{
-          fontFamily: 'Satoshi,sans-serif', fontWeight: 400,
+          fontFamily: 'Inter,sans-serif', fontWeight: 400,
           fontSize: desktop ? 13 : 12, lineHeight: desktop ? '24px' : '20px',
           color: '#b7b5bb', margin: 0,
         }}>

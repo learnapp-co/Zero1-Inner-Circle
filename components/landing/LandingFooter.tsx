@@ -29,7 +29,7 @@ export function LandingFooter({ event }: { event: LandingEvent }) {
             </a>
           </div>
           {/* Copyright */}
-          <p style={{ fontFamily: 'Satoshi,sans-serif', fontWeight: 500, fontSize: 13, lineHeight: '22px', color: '#535157', textAlign: 'center', maxWidth: 281 }}>
+          <p style={{ fontFamily: 'Inter,sans-serif', fontWeight: 500, fontSize: 13, lineHeight: '22px', color: '#535157', textAlign: 'center', maxWidth: 281 }}>
             This property is owned and managed by Zero1 by Zerodha. All rights reserved 2026 ©
           </p>
         </div>
@@ -45,11 +45,11 @@ export function LandingFooter({ event }: { event: LandingEvent }) {
         {/* eslint-disable-next-line @next/next/no-img-element */}
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img alt="Zero1" src={ZERO1_LOGO}
-          style={{ position: 'absolute', left: 150, top: 76, width: 138, height: 42 }} />
+          style={{ position: 'absolute', left: 150, top: 76, width: 139, height: 42 }} />
         {/* copyright — centre */}
         <p style={{
           position: 'absolute', left: '50%', transform: 'translateX(-50%)', top: 84,
-          fontFamily: 'Satoshi,sans-serif', fontWeight: 500, fontSize: 13, lineHeight: '22px',
+          fontFamily: 'Inter,sans-serif', fontWeight: 500, fontSize: 13, lineHeight: '22px',
           color: '#535157', textAlign: 'center', whiteSpace: 'nowrap',
         }}>
           This property is owned and managed by Zero1 by Zerodha. All rights reserved 2026 ©

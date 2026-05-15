@@ -104,7 +104,7 @@ function TimelineCard({
           padding: mobile ? '3px 10px' : '4px 12px',
         }}>
           <span style={{
-            fontFamily: 'Satoshi,sans-serif',
+            fontFamily: 'Inter,sans-serif',
             fontWeight: 700,
             fontSize: mobile ? 11 : 12,
             lineHeight: '16px',
@@ -119,7 +119,7 @@ function TimelineCard({
       {/* Title + body */}
       <div style={{ padding: pad }}>
         <p style={{
-          fontFamily: 'Satoshi,sans-serif',
+          fontFamily: 'Inter,sans-serif',
           fontWeight: 700,
           fontSize: titleFs,
           lineHeight: '22px',
@@ -129,7 +129,7 @@ function TimelineCard({
           {item.title}
         </p>
         <p style={{
-          fontFamily: 'Satoshi,sans-serif',
+          fontFamily: 'Inter,sans-serif',
           fontWeight: 500,
           fontSize: bodyFs,
           lineHeight: '18px',

@@ -59,7 +59,7 @@
 }
 
 .textSm {
-  font-family: var(--font-body, 'Satoshi', sans-serif);
+  font-family: var(--font-body, 'Inter', sans-serif);
   font-size: 14px;
   font-weight: 500;
   line-height: 16px;
@@ -68,7 +68,7 @@
 }
 
 .textLg {
-  font-family: var(--font-body, 'Satoshi', sans-serif);
+  font-family: var(--font-body, 'Inter', sans-serif);
   font-size: 24px;
   font-weight: 400;
   line-height: 24px;

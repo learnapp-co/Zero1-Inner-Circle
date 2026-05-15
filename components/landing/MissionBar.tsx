@@ -37,7 +37,7 @@ export function MissionBar({ event }: { event: LandingEvent }) {
         >
           <span
             style={{
-              fontFamily: 'Satoshi, sans-serif',
+              fontFamily: 'Inter, sans-serif',
               fontWeight: 500,
               fontSize: 14,
               lineHeight: 1.3,
