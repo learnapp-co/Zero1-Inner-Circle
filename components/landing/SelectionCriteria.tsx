@@ -1,6 +1,7 @@
 import { SectionTitle } from './SectionTitle'
 import type { LandingEvent, SelectionProcessItem } from './types'
 import { ASSET_STEP_MISSION, ASSET_STEP_REVIEW, ASSET_STEP_PAYMENT, ASSET_STEP_RSVP } from './assets'
+import { renderText } from './renderText'
 
 /*
  * Figma node 6070:4935 — "Selection Process" section.
@@ -62,7 +63,7 @@ export function SelectionCriteria({ event }: { event: LandingEvent }) {
               {/* Text */}
               <div style={{ flex: 1, paddingBottom: i < steps.length - 1 ? 24 : 0 }}>
                 <p style={{ fontFamily: 'Inter,sans-serif', fontWeight: 700, fontSize: 14, lineHeight: '20px', color: '#fff', marginBottom: 4 }}>{step.title}</p>
-                <p style={{ fontFamily: 'Inter,sans-serif', fontWeight: 400, fontSize: 12, lineHeight: '20px', color: '#807d85' }}>{step.body}</p>
+                <p style={{ fontFamily: 'Inter,sans-serif', fontWeight: 400, fontSize: 12, lineHeight: '20px', color: '#807d85' }}>{renderText(step.body, '#c5c4c8')}</p>
               </div>
             </div>
           ))}
@@ -94,7 +95,7 @@ export function SelectionCriteria({ event }: { event: LandingEvent }) {
               {/* Text */}
               <div style={{ flex: 1, paddingBottom: i < steps.length - 1 ? 32 : 0 }}>
                 <p style={{ fontFamily: 'Inter,sans-serif', fontWeight: 700, fontSize: 18, lineHeight: '24px', color: '#fff', marginBottom: 6 }}>{step.title}</p>
-                <p style={{ fontFamily: 'Inter,sans-serif', fontWeight: 400, fontSize: 16, lineHeight: '24px', color: '#807d85' }}>{step.body}</p>
+                <p style={{ fontFamily: 'Inter,sans-serif', fontWeight: 400, fontSize: 16, lineHeight: '24px', color: '#807d85' }}>{renderText(step.body, '#c5c4c8')}</p>
               </div>
             </div>
           ))}

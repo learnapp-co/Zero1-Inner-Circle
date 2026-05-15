@@ -5,6 +5,7 @@ import Link from 'next/link'
 
 type ThingsToKnowRow = { text: string; iconUrl: string }
 type SelectionStepRow = { icon: string; iconSize: string; title: string; body: string }
+type ActivityFormRow = { icon: string; title: string; description: string }
 
 type EventForm = {
   id: string
@@ -28,6 +29,7 @@ type EventForm = {
     whatsappTemplateReminder: string
     whatsappTemplatePlusOne: string
     eventCardImageUrl: string
+    activities: ActivityFormRow[]
     thingsToKnow: ThingsToKnowRow[]
     selectionProcess: SelectionStepRow[]
   }
@@ -35,6 +37,7 @@ type EventForm = {
 
 const BLANK_KNOW_ROW: ThingsToKnowRow = { text: '', iconUrl: '' }
 const BLANK_STEP_ROW: SelectionStepRow = { icon: '', iconSize: '32', title: '', body: '' }
+const BLANK_ACTIVITY_ROW: ActivityFormRow = { icon: '', title: '', description: '' }
 
 const DEFAULTS: EventForm = {
   id: '',
@@ -58,6 +61,7 @@ const DEFAULTS: EventForm = {
     whatsappTemplateReminder: '',
     whatsappTemplatePlusOne: '',
     eventCardImageUrl: '',
+    activities: [BLANK_ACTIVITY_ROW],
     thingsToKnow: [BLANK_KNOW_ROW],
     selectionProcess: [BLANK_STEP_ROW],
   },
@@ -105,6 +109,10 @@ export default function SettingsPage() {
               whatsappTemplateReminder: s?.whatsappTemplateReminder ?? '',
               whatsappTemplatePlusOne:  s?.whatsappTemplatePlusOne  ?? '',
               eventCardImageUrl: s?.eventCardImageUrl ?? '',
+              activities: Array.isArray(s?.activities) && s.activities.length
+                // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                ? (s.activities as any[]).map((r: any) => ({ icon: r.icon ?? '', title: r.title ?? '', description: r.description ?? '' }))
+                : [BLANK_ACTIVITY_ROW],
               thingsToKnow: Array.isArray(s?.thingsToKnow) && s.thingsToKnow.length
                 // eslint-disable-next-line @typescript-eslint/no-explicit-any
                 ? (s.thingsToKnow as any[]).map((r: any) => typeof r === 'string' ? { text: r, iconUrl: '' } : { text: r.text ?? '', iconUrl: r.iconUrl ?? '' })
@@ -137,6 +145,11 @@ export default function SettingsPage() {
     setSaved(false)
     setError(null)
 
+    const validActivities = form.settings.activities.filter(r => r.title.trim())
+    const parsedActivities = validActivities.length
+      ? validActivities.map(r => ({ icon: r.icon.trim() || undefined, title: r.title, description: r.description }))
+      : undefined
+
     const validKnow = form.settings.thingsToKnow.filter(r => r.text.trim())
     const parsedThingsToKnow = validKnow.length
       ? validKnow.map(r => ({ text: r.text, ...(r.iconUrl.trim() ? { iconUrl: r.iconUrl } : {}) }))
@@ -168,6 +181,7 @@ export default function SettingsPage() {
         whatsappTemplateReminder: form.settings.whatsappTemplateReminder || undefined,
         whatsappTemplatePlusOne:  form.settings.whatsappTemplatePlusOne  || undefined,
         eventCardImageUrl: form.settings.eventCardImageUrl || undefined,
+        activities:       parsedActivities        ?? undefined,
         thingsToKnow:    parsedThingsToKnow    ?? undefined,
         selectionProcess: parsedSelectionProcess ?? undefined,
       },
@@ -335,6 +349,45 @@ export default function SettingsPage() {
             </div>
             <span className="text-sm text-white">Allow attendees to bring a +1</span>
           </label>
+        </Section>
+
+        {/* Activities */}
+        <Section title="Activities (Skills you&apos;ll learn)">
+          <p className="text-xs -mt-2 mb-2" style={{ color: 'var(--muted)' }}>
+            Each activity card shown in the &quot;Skills you&apos;ll learn&quot; section. Use <code>\n</code> in the title for line breaks, <code>**bold**</code> in description for emphasis.
+          </p>
+          <div className="flex flex-col gap-4">
+            {form.settings.activities.map((row, i) => (
+              <div key={i} className="rounded-lg p-4 flex flex-col gap-3" style={{ background: 'var(--bg)', border: '1px solid var(--border)' }}>
+                <div className="flex items-center justify-between">
+                  <span className="text-xs font-semibold" style={{ color: 'var(--muted)' }}>Activity {i + 1}</span>
+                  {form.settings.activities.length > 1 && (
+                    <button type="button" onClick={() => setSetting('activities', form.settings.activities.filter((_, j) => j !== i))}
+                      className="text-xs px-2 py-0.5 rounded" style={{ color: '#f87171', background: 'rgba(248,113,113,0.1)' }}>
+                      Remove
+                    </button>
+                  )}
+                </div>
+                <Field label="Icon URL" hint="Leave blank to use default icon for this position">
+                  <Input value={row.icon} onChange={v => setSetting('activities', form.settings.activities.map((r, j) => j === i ? { ...r, icon: v } : r))}
+                    placeholder="https://…/icon.png" />
+                </Field>
+                <Field label="Title" hint="Use \n for line breaks">
+                  <Input value={row.title} onChange={v => setSetting('activities', form.settings.activities.map((r, j) => j === i ? { ...r, title: v } : r))}
+                    placeholder="Risk Analysis" />
+                </Field>
+                <Field label="Description" hint="Use **text** for bold">
+                  <Textarea value={row.description} onChange={v => setSetting('activities', form.settings.activities.map((r, j) => j === i ? { ...r, description: v } : r))}
+                    placeholder="Describe this activity…" rows={3} />
+                </Field>
+              </div>
+            ))}
+          </div>
+          <button type="button" onClick={() => setSetting('activities', [...form.settings.activities, BLANK_ACTIVITY_ROW])}
+            className="mt-2 text-xs px-3 py-1.5 rounded-lg font-medium"
+            style={{ background: 'rgba(242,186,48,0.12)', color: 'var(--accent)', border: '1px solid rgba(242,186,48,0.25)' }}>
+            + Add activity
+          </button>
         </Section>
 
         {/* Things to Know */}

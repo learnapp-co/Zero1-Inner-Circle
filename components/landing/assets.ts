@@ -31,11 +31,11 @@ export const ASSET_CARD_ICON_PASSES = 'https://www.figma.com/api/mcp/asset/f690a
 export const ASSET_INFO_ICON        = 'https://www.figma.com/api/mcp/asset/2884fbe5-1a5d-4f95-95db-4e449f722a99' // info-outline-rounded (24×24)
 
 // ─── Skills / activity icons (one per default activity) ──────────────────────
-export const ASSET_ICON_STACK_ALT   = 'https://www.figma.com/api/mcp/asset/ff27dfb7-7c2a-4b69-a6b1-214b7707fc5f' // Group48096196  — Risk Analysis
-export const ASSET_ICON_MONEY_ALT   = 'https://www.figma.com/api/mcp/asset/0f89eecf-29b6-4066-ae52-f5bffcbeca8d' // Group48096195  — Structural Risks
-export const ASSET_ICON_BRAIN       = 'https://www.figma.com/api/mcp/asset/d236eca0-ef27-48e9-9e59-61aceb6e6ec3' // Group48096197  — Investor Psychology
-export const ASSET_ICON_DIAGNOSTICS = 'https://www.figma.com/api/mcp/asset/6c0f9acc-95e7-42c5-874a-3bb3a676e959' // Group48096193  — Portfolio Diagnostics
-export const ASSET_ICON_STRESS      = 'https://www.figma.com/api/mcp/asset/e8357503-34b7-48ea-b822-4200695ee0d5' // Group48096194  — Stress Testing
+export const ASSET_ICON_STACK_ALT   = 'https://www.figma.com/api/mcp/asset/e67b39c9-50cf-438b-bb3e-d03b31c33c6f' // Group48096196  — Risk Analysis
+export const ASSET_ICON_MONEY_ALT   = 'https://www.figma.com/api/mcp/asset/3f712b1f-4b3c-4583-b066-dedbd85b2ea8' // Group48096195  — Structural Risks
+export const ASSET_ICON_BRAIN       = 'https://www.figma.com/api/mcp/asset/cc93bd08-f2de-4d4d-9121-3cfeaaaabacb' // Group48096197  — Investor Psychology
+export const ASSET_ICON_DIAGNOSTICS = 'https://www.figma.com/api/mcp/asset/d65c8e89-05e4-4eeb-a98e-053a1b166ebf' // Group48096193  — Portfolio Diagnostics
+export const ASSET_ICON_STRESS      = 'https://www.figma.com/api/mcp/asset/a6406cb7-7865-4683-9f70-38cc7ce03fc3' // Group48096194  — Stress Testing
 
 // ─── Timeline card backgrounds ────────────────────────────────────────────────
 export const ASSET_CARD_BG          = 'https://www.figma.com/api/mcp/asset/32f547c4-1fb4-4e31-b75f-dedcc8e4ccac' // Rectangle281 (first card image)

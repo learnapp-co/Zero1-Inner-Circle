@@ -120,10 +120,22 @@ export function UpcomingEvents({ event }: { event: LandingEvent }) {
             <div className="absolute flex items-center justify-between" style={{
               bottom: 24, left: '50%', transform: 'translateX(-50%)', width: 856,
             }}>
-              {/* Date + city */}
+              {/* Passes + price */}
               <div className="flex items-center" style={{ gap: 0 }}>
-                <IconBox src={ASSET_CARD_ICON_DATE} size={74} />
+                <IconBox src={ASSET_CARD_ICON_PASSES} size={74} />
                 <div style={{ display: 'flex', flexDirection: 'column', gap: 8, width: 344 }}>
+                  <p style={{ fontFamily: 'Inter,sans-serif', fontWeight: 500, fontSize: 16, lineHeight: '24px', color: '#fff', margin: 0 }}>
+                    Only <strong>{event.maxCapacity}</strong> passes
+                  </p>
+                  <p style={{ fontFamily: 'Inter,sans-serif', fontWeight: 500, fontSize: 16, color: '#fff', margin: 0 }}>
+                    {event.price ?? '₹3,000'} + GST (you &amp; your +1)
+                  </p>
+                </div>
+              </div>
+              {/* Date + city */}
+              <div className="flex items-center" style={{ gap: 0, width: 297 }}>
+                <IconBox src={ASSET_CARD_ICON_DATE} size={74} />
+                <div style={{ display: 'flex', flexDirection: 'column', gap: 8, width: 240 }}>
                   <p style={{ fontFamily: 'Inter,sans-serif', fontWeight: 500, fontSize: 16, lineHeight: '24px', color: '#fff', margin: 0 }}>
                     {event.date}{event.time ? `, [${event.time}]` : ''}
                   </p>
@@ -149,18 +161,6 @@ export function UpcomingEvents({ event }: { event: LandingEvent }) {
                       </div>
                     )}
                   </div>
-                </div>
-              </div>
-              {/* Passes + price */}
-              <div className="flex items-center" style={{ gap: 0, width: 297 }}>
-                <IconBox src={ASSET_CARD_ICON_PASSES} size={74} />
-                <div style={{ display: 'flex', flexDirection: 'column', gap: 8, width: 240 }}>
-                  <p style={{ fontFamily: 'Inter,sans-serif', fontWeight: 500, fontSize: 16, lineHeight: '24px', color: '#fff', margin: 0 }}>
-                    Only <strong>{event.maxCapacity}</strong> passes
-                  </p>
-                  <p style={{ fontFamily: 'Inter,sans-serif', fontWeight: 500, fontSize: 16, color: '#fff', margin: 0 }}>
-                    {event.price ?? '₹3,000'} + GST (you &amp; your +1)
-                  </p>
                 </div>
               </div>
             </div>

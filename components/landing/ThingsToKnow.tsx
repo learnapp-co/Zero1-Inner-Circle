@@ -1,6 +1,7 @@
 import { SectionTitle } from './SectionTitle'
 import type { LandingEvent, ThingsToKnowItem } from './types'
 import { ASSET_PEN_1, ASSET_PEN_2, ASSET_PEN_3, ASSET_PEN_4, ASSET_PEN_5, ASSET_PEN_6, ASSET_PEN_7 } from './assets'
+import { renderText } from './renderText'
 
 const PENS = [ASSET_PEN_1, ASSET_PEN_2, ASSET_PEN_3, ASSET_PEN_4, ASSET_PEN_5, ASSET_PEN_6, ASSET_PEN_7]
 
@@ -21,9 +22,11 @@ function Item({ item, index, size }: { item: ThingsToKnowItem; index: number; si
   const lh       = size === 'lg' ? '22px' : '20px'
   return (
     <div className="flex items-start" style={{ gap: 8 }}>
-      {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img alt="" src={iconSrc} className="shrink-0" style={{ width: iconSize, height: iconSize }} />
-      <p style={{ fontFamily: 'Inter,sans-serif', fontWeight: 500, fontSize: fs, lineHeight: lh, color: '#c5c4c8' }}>{item.text}</p>
+      <div style={{ width: iconSize, height: iconSize, flexShrink: 0 }}>
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img alt="" src={iconSrc} style={{ width: iconSize, height: iconSize, objectFit: 'contain', display: 'block' }} />
+      </div>
+      <p style={{ fontFamily: 'Inter,sans-serif', fontWeight: 500, fontSize: fs, lineHeight: lh, color: '#c5c4c8' }}>{renderText(item.text)}</p>
     </div>
   )
 }

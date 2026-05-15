@@ -5,6 +5,9 @@ import {
   ASSET_ICON_DIAGNOSTICS, ASSET_ICON_STRESS,
 } from './assets'
 import { sanitizeUrl } from './sanitizeUrl'
+import { renderText } from './renderText'
+
+const ICON_FALLBACKS = [ASSET_ICON_STACK_ALT, ASSET_ICON_MONEY_ALT, ASSET_ICON_BRAIN, ASSET_ICON_DIAGNOSTICS, ASSET_ICON_STRESS]
 
 /*
  * Figma node 6055:4294 — "Skills you'll learn" section.
@@ -47,12 +50,12 @@ const DEFAULT_ACTIVITIES: ActivityItem[] = [
   },
 ]
 
-function ActivityCard({ item, desktop }: { item: ActivityItem; desktop?: boolean }) {
+function ActivityCard({ item, index, desktop }: { item: ActivityItem; index: number; desktop?: boolean }) {
   const isUrl = item.icon?.startsWith('http') || item.icon?.startsWith('/')
-  const iconSrc = isUrl ? (sanitizeUrl(item.icon) ?? ASSET_ICON_STACK_ALT) : ASSET_ICON_STACK_ALT
+  const iconSrc = isUrl ? (sanitizeUrl(item.icon) ?? ICON_FALLBACKS[index % 5]) : ICON_FALLBACKS[index % 5]
 
   return (
-    <div className="flex flex-col items-start" style={{ gap: desktop ? 18 : 18 }}>
+    <div className="flex flex-col items-start" style={{ gap: 18 }}>
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img alt="" src={iconSrc} style={{ width: desktop ? 28 : 24, height: desktop ? 28 : 24 }} />
       <div className="flex flex-col" style={{ gap: 8 }}>
@@ -61,14 +64,14 @@ function ActivityCard({ item, desktop }: { item: ActivityItem; desktop?: boolean
           fontSize: desktop ? 18 : 14, lineHeight: '24px',
           color: '#fff', margin: 0,
         }}>
-          {item.title}
+          {renderText(item.title)}
         </p>
         <p style={{
           fontFamily: 'Inter,sans-serif', fontWeight: 400,
           fontSize: desktop ? 13 : 12, lineHeight: desktop ? '24px' : '20px',
           color: '#b7b5bb', margin: 0,
         }}>
-          {item.description}
+          {renderText(item.description, '#e0dfe3')}
         </p>
       </div>
     </div>
@@ -86,7 +89,7 @@ export function ActivitiesGrid({ event }: { event: LandingEvent }) {
       <div className="flex flex-col md:hidden" style={{ gap: 32 }}>
         <SectionTitle>{`Skills you'll learn`}</SectionTitle>
         <div className="flex flex-col px-4" style={{ gap: 28 }}>
-          {activities.map((item, i) => <ActivityCard key={i} item={item} />)}
+          {activities.map((item, i) => <ActivityCard key={i} item={item} index={i} />)}
         </div>
       </div>
 
@@ -94,20 +97,20 @@ export function ActivitiesGrid({ event }: { event: LandingEvent }) {
       <div className="hidden md:flex flex-col items-center w-full" style={{ gap: 40 }}>
         <SectionTitle>{`Skills you'll learn`}</SectionTitle>
         <div className="flex flex-col" style={{ gap: 32, width: 841 }}>
-          {/* Row 1: widths 251/252/231, gap 51px */}
+          {/* Row 1: 3 equal cards, gap 51px */}
           <div className="flex" style={{ gap: 51 }}>
             {row1.map((item, i) => (
-              <div key={i} style={{ width: ([251, 252, 231] as number[])[i] ?? 240 }}>
-                <ActivityCard item={item} desktop />
+              <div key={i} style={{ flex: 1 }}>
+                <ActivityCard item={item} index={i} desktop />
               </div>
             ))}
           </div>
-          {/* Row 2: widths 346/281, gap 30px, centred */}
+          {/* Row 2: 2 equal cards, centred, gap 30px */}
           {row2.length > 0 && (
             <div className="flex justify-center" style={{ gap: 30 }}>
               {row2.map((item, i) => (
-                <div key={i} style={{ width: ([346, 281] as number[])[i] ?? 300 }}>
-                  <ActivityCard item={item} desktop />
+                <div key={i} style={{ flex: 1 }}>
+                  <ActivityCard item={item} index={i + 3} desktop />
                 </div>
               ))}
             </div>
