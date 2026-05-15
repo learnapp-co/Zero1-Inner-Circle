@@ -57,7 +57,7 @@ export function DonationSection({ event }: { event: LandingEvent }) {
         </p>
 
         {/* In partnership with */}
-        <div className="flex flex-col items-center" style={{ marginTop: 36, gap: 20 }}>
+        <div className="flex flex-col items-center" style={{ marginTop: 36, gap: 120 }}>
           <p style={{ fontFamily: 'Satisfy,cursive', fontWeight: 400, fontSize: 16, color: '#98969d', letterSpacing: '0.32px', margin: 0 }}>
             In partnership with
           </p>
@@ -103,7 +103,7 @@ export function DonationSection({ event }: { event: LandingEvent }) {
           </p>
 
           {/* In partnership with — Satisfy 20px, #98969d, centred */}
-          <div className="flex flex-col items-center" style={{ marginTop: 40, gap: 27 }}>
+          <div className="flex flex-col items-center" style={{ marginTop: 120, gap: 27 }}>
             <p style={{ fontFamily: 'Satisfy,cursive', fontWeight: 400, fontSize: 20, color: '#98969d', letterSpacing: '0.4px', margin: 0, textAlign: 'center' }}>
               In partnership with
             </p>

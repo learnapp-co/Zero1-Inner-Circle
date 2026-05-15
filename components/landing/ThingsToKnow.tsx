@@ -41,7 +41,7 @@ export function ThingsToKnow({ event }: { event: LandingEvent }) {
       </div>
 
       {/* ── Desktop ── */}
-      <div className="hidden md:flex flex-col" style={{ gap: 32, width: 650 }}>
+      <div className="hidden md:flex flex-col" style={{ gap: 32 }}>
         <SectionTitle>Things to know</SectionTitle>
         <div className="flex flex-col" style={{ gap: 24 }}>
           {items.map((item, i) => <Item key={i} text={item} size="lg" />)}

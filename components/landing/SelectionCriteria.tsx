@@ -43,16 +43,21 @@ export function SelectionCriteria({ event }: { event: LandingEvent }) {
       {/* ── Mobile ── */}
       <div className="flex flex-col px-4 md:hidden" style={{ gap: 24 }}>
         <SectionTitle>Selection Process</SectionTitle>
-        <div className="flex flex-col" style={{ gap: 24 }}>
+        <div className="flex flex-col" style={{ gap: 0 }}>
           {STEPS.map((step, i) => (
             <div key={i} className="flex items-start" style={{ gap: 16 }}>
-              {/* Icon */}
-              <div className="shrink-0 flex items-center justify-center" style={{ width: 40, height: 40 }}>
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img alt="" src={step.icon} style={{ width: step.iconSize, height: step.iconSize }} />
+              {/* Icon + vertical connector */}
+              <div className="shrink-0 flex flex-col items-center" style={{ width: 40 }}>
+                <div className="flex items-center justify-center" style={{ width: 40, height: 40 }}>
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img alt="" src={step.icon} style={{ width: step.iconSize * 0.85, height: step.iconSize * 0.85 }} />
+                </div>
+                {i < STEPS.length - 1 && (
+                  <div style={{ width: 1, flex: 1, minHeight: 24, background: 'linear-gradient(to bottom, rgba(255,255,255,0.18) 0%, rgba(255,255,255,0.04) 100%)' }} />
+                )}
               </div>
               {/* Text */}
-              <div style={{ flex: 1 }}>
+              <div style={{ flex: 1, paddingBottom: i < STEPS.length - 1 ? 24 : 0 }}>
                 <p style={{ fontFamily: 'Satoshi,sans-serif', fontWeight: 700, fontSize: 14, lineHeight: '20px', color: '#fff', marginBottom: 4 }}>{step.title}</p>
                 <p style={{ fontFamily: 'Satoshi,sans-serif', fontWeight: 400, fontSize: 12, lineHeight: '20px', color: '#807d85' }}>{step.body}</p>
               </div>
@@ -69,16 +74,22 @@ export function SelectionCriteria({ event }: { event: LandingEvent }) {
       {/* ── Desktop ── */}
       <div className="hidden md:flex flex-col" style={{ gap: 40, width: 841 }}>
         <SectionTitle>Selection Process</SectionTitle>
-        <div className="flex flex-col" style={{ gap: 32 }}>
+        <div className="flex flex-col" style={{ gap: 0 }}>
           {STEPS.map((step, i) => (
             <div key={i} className="flex items-start" style={{ gap: 20 }}>
-              {/* Icon */}
-              <div className="shrink-0 flex items-center justify-center" style={{ width: 48, height: 48, marginTop: 2 }}>
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img alt="" src={step.icon} style={{ width: step.iconSize, height: step.iconSize }} />
+              {/* Icon + vertical connector */}
+              <div className="shrink-0 flex flex-col items-center" style={{ width: 48 }}>
+                <div className="flex items-center justify-center" style={{ width: 48, height: 48, marginTop: 2 }}>
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img alt="" src={step.icon} style={{ width: step.iconSize, height: step.iconSize }} />
+                </div>
+                {/* Vertical connector line — hidden after last step */}
+                {i < STEPS.length - 1 && (
+                  <div style={{ width: 1, flex: 1, minHeight: 32, background: 'linear-gradient(to bottom, rgba(255,255,255,0.18) 0%, rgba(255,255,255,0.04) 100%)' }} />
+                )}
               </div>
               {/* Text */}
-              <div style={{ flex: 1 }}>
+              <div style={{ flex: 1, paddingBottom: i < STEPS.length - 1 ? 32 : 0 }}>
                 <p style={{ fontFamily: 'Satoshi,sans-serif', fontWeight: 700, fontSize: 18, lineHeight: '24px', color: '#fff', marginBottom: 6 }}>{step.title}</p>
                 <p style={{ fontFamily: 'Satoshi,sans-serif', fontWeight: 400, fontSize: 16, lineHeight: '24px', color: '#807d85' }}>{step.body}</p>
               </div>

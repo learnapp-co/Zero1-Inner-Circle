@@ -16,14 +16,14 @@ export function LandingFooter({ event }: { event: LandingEvent }) {
           {/* Social icons */}
           <div className="flex items-center" style={{ gap: 13 }}>
             <a href={instagram || '#'} target={instagram ? '_blank' : undefined} rel="noopener noreferrer" aria-label="Instagram"
-              className="relative overflow-hidden" style={{ width: 32, height: 32 }}>
+              style={{ width: 32, height: 32, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img alt="Instagram" src={ASSET_INSTAGRAM} style={{ width: 20, height: 20, position: 'absolute', left: 6, top: 6 }} />
+              <img alt="Instagram" src={ASSET_INSTAGRAM} style={{ width: 32, height: 32 }} />
             </a>
             <a href={email ? `mailto:${email}` : '#'} aria-label="Email"
-              className="relative overflow-hidden" style={{ width: 32, height: 32 }}>
+              style={{ width: 32, height: 32, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img alt="Email" src={ASSET_EMAIL} style={{ width: 20, height: 20, position: 'absolute', left: 6, top: 6 }} />
+              <img alt="Email" src={ASSET_EMAIL} style={{ width: 32, height: 32 }} />
             </a>
           </div>
           {/* Copyright */}
@@ -54,14 +54,14 @@ export function LandingFooter({ event }: { event: LandingEvent }) {
         {/* social icons — right */}
         <div className="absolute flex items-center" style={{ left: 1195, top: 81, gap: 25 }}>
           <a href={instagram || '#'} target={instagram ? '_blank' : undefined} rel="noopener noreferrer" aria-label="Instagram"
-            style={{ width: 32, height: 32, overflow: 'hidden', position: 'relative', display: 'block' }}>
+            style={{ width: 32, height: 32, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img alt="Instagram" src={ASSET_INSTAGRAM} style={{ width: 24, height: 24, position: 'absolute', left: 4, top: 4 }} />
+            <img alt="Instagram" src={ASSET_INSTAGRAM} style={{ width: 32, height: 32 }} />
           </a>
           <a href={email ? `mailto:${email}` : '#'} aria-label="Email"
-            style={{ width: 32, height: 32, overflow: 'hidden', position: 'relative', display: 'block' }}>
+            style={{ width: 32, height: 32, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img alt="Email" src={ASSET_EMAIL} style={{ width: 20, height: 20, position: 'absolute', left: 6, top: 6 }} />
+            <img alt="Email" src={ASSET_EMAIL} style={{ width: 32, height: 32 }} />
           </a>
         </div>
       </div>
