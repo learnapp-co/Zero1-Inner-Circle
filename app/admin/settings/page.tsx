@@ -3,6 +3,9 @@
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
 
+type ThingsToKnowRow = { text: string; iconUrl: string }
+type SelectionStepRow = { icon: string; iconSize: string; title: string; body: string }
+
 type EventForm = {
   id: string
   name: string
@@ -24,10 +27,13 @@ type EventForm = {
     whatsappTemplateSelected: string
     whatsappTemplateReminder: string
     whatsappTemplatePlusOne: string
-    thingsToKnow: string
-    selectionProcess: string
+    thingsToKnow: ThingsToKnowRow[]
+    selectionProcess: SelectionStepRow[]
   }
 }
+
+const BLANK_KNOW_ROW: ThingsToKnowRow = { text: '', iconUrl: '' }
+const BLANK_STEP_ROW: SelectionStepRow = { icon: '', iconSize: '32', title: '', body: '' }
 
 const DEFAULTS: EventForm = {
   id: '',
@@ -50,8 +56,8 @@ const DEFAULTS: EventForm = {
     whatsappTemplateSelected: '',
     whatsappTemplateReminder: '',
     whatsappTemplatePlusOne: '',
-    thingsToKnow: '',
-    selectionProcess: '',
+    thingsToKnow: [BLANK_KNOW_ROW],
+    selectionProcess: [BLANK_STEP_ROW],
   },
 }
 
@@ -96,8 +102,14 @@ export default function SettingsPage() {
               whatsappTemplateSelected: s?.whatsappTemplateSelected ?? '',
               whatsappTemplateReminder: s?.whatsappTemplateReminder ?? '',
               whatsappTemplatePlusOne:  s?.whatsappTemplatePlusOne  ?? '',
-              thingsToKnow:    Array.isArray(s?.thingsToKnow)    ? JSON.stringify(s.thingsToKnow, null, 2)    : '',
-              selectionProcess: Array.isArray(s?.selectionProcess) ? JSON.stringify(s.selectionProcess, null, 2) : '',
+              thingsToKnow: Array.isArray(s?.thingsToKnow) && s.thingsToKnow.length
+                // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                ? (s.thingsToKnow as any[]).map((r: any) => typeof r === 'string' ? { text: r, iconUrl: '' } : { text: r.text ?? '', iconUrl: r.iconUrl ?? '' })
+                : [BLANK_KNOW_ROW],
+              selectionProcess: Array.isArray(s?.selectionProcess) && s.selectionProcess.length
+                // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                ? (s.selectionProcess as any[]).map((r: any) => ({ icon: r.icon ?? '', iconSize: String(r.iconSize ?? 32), title: r.title ?? '', body: r.body ?? '' }))
+                : [BLANK_STEP_ROW],
             },
           })
         }
@@ -122,14 +134,15 @@ export default function SettingsPage() {
     setSaved(false)
     setError(null)
 
-    let parsedThingsToKnow: unknown = undefined
-    let parsedSelectionProcess: unknown = undefined
-    try {
-      if (form.settings.thingsToKnow.trim()) parsedThingsToKnow = JSON.parse(form.settings.thingsToKnow)
-    } catch { setError('Things to Know: invalid JSON'); setSaving(false); return }
-    try {
-      if (form.settings.selectionProcess.trim()) parsedSelectionProcess = JSON.parse(form.settings.selectionProcess)
-    } catch { setError('Selection Process: invalid JSON'); setSaving(false); return }
+    const validKnow = form.settings.thingsToKnow.filter(r => r.text.trim())
+    const parsedThingsToKnow = validKnow.length
+      ? validKnow.map(r => ({ text: r.text, ...(r.iconUrl.trim() ? { iconUrl: r.iconUrl } : {}) }))
+      : undefined
+
+    const validSteps = form.settings.selectionProcess.filter(r => r.title.trim() || r.icon.trim())
+    const parsedSelectionProcess = validSteps.length
+      ? validSteps.map(r => ({ icon: r.icon, iconSize: Number(r.iconSize) || 32, title: r.title, body: r.body }))
+      : undefined
 
     const payload = {
       name:         form.name,
@@ -318,26 +331,80 @@ export default function SettingsPage() {
 
         {/* Things to Know */}
         <Section title="Things to Know">
-          <Field label="Items (JSON array)" hint={`Each item: { "text": "...", "iconUrl": "https://..." } — iconUrl is optional, cycles through pen icons if omitted`}>
-            <Textarea
-              value={form.settings.thingsToKnow}
-              onChange={v => setSetting('thingsToKnow', v)}
-              placeholder={`[\n  { "text": "Only 15 tickets available" },\n  { "text": "Non-transferable", "iconUrl": "https://..." }\n]`}
-              rows={6}
-            />
-          </Field>
+          <p className="text-xs -mt-2 mb-2" style={{ color: 'var(--muted)' }}>
+            Each item appears as a bullet point. Icon URL is optional — leaves it blank to cycle through default pen icons.
+          </p>
+          <div className="flex flex-col gap-4">
+            {form.settings.thingsToKnow.map((row, i) => (
+              <div key={i} className="rounded-lg p-4 flex flex-col gap-3" style={{ background: 'var(--bg)', border: '1px solid var(--border)' }}>
+                <div className="flex items-center justify-between">
+                  <span className="text-xs font-semibold" style={{ color: 'var(--muted)' }}>Item {i + 1}</span>
+                  {form.settings.thingsToKnow.length > 1 && (
+                    <button type="button" onClick={() => setSetting('thingsToKnow', form.settings.thingsToKnow.filter((_, j) => j !== i))}
+                      className="text-xs px-2 py-0.5 rounded" style={{ color: '#f87171', background: 'rgba(248,113,113,0.1)' }}>
+                      Remove
+                    </button>
+                  )}
+                </div>
+                <Field label="Description">
+                  <Input value={row.text} onChange={v => setSetting('thingsToKnow', form.settings.thingsToKnow.map((r, j) => j === i ? { ...r, text: v } : r))}
+                    placeholder="Tickets are non-transferable" />
+                </Field>
+                <Field label="Icon URL" hint="Leave blank to use default pen icon">
+                  <Input value={row.iconUrl} onChange={v => setSetting('thingsToKnow', form.settings.thingsToKnow.map((r, j) => j === i ? { ...r, iconUrl: v } : r))}
+                    placeholder="https://…/icon.png" />
+                </Field>
+              </div>
+            ))}
+          </div>
+          <button type="button" onClick={() => setSetting('thingsToKnow', [...form.settings.thingsToKnow, BLANK_KNOW_ROW])}
+            className="mt-2 text-xs px-3 py-1.5 rounded-lg font-medium"
+            style={{ background: 'rgba(242,186,48,0.12)', color: 'var(--accent)', border: '1px solid rgba(242,186,48,0.25)' }}>
+            + Add item
+          </button>
         </Section>
 
         {/* Selection Process */}
         <Section title="Selection Process">
-          <Field label="Steps (JSON array)" hint={`Each step: { "icon": "https://...", "iconSize": 38, "title": "...", "body": "..." }`}>
-            <Textarea
-              value={form.settings.selectionProcess}
-              onChange={v => setSetting('selectionProcess', v)}
-              placeholder={`[\n  { "icon": "https://...", "iconSize": 38, "title": "Mission Submission", "body": "..." }\n]`}
-              rows={8}
-            />
-          </Field>
+          <p className="text-xs -mt-2 mb-2" style={{ color: 'var(--muted)' }}>
+            Steps shown in the selection process section. Each step has an icon, title, and description.
+          </p>
+          <div className="flex flex-col gap-4">
+            {form.settings.selectionProcess.map((step, i) => (
+              <div key={i} className="rounded-lg p-4 flex flex-col gap-3" style={{ background: 'var(--bg)', border: '1px solid var(--border)' }}>
+                <div className="flex items-center justify-between">
+                  <span className="text-xs font-semibold" style={{ color: 'var(--muted)' }}>Step {i + 1}</span>
+                  {form.settings.selectionProcess.length > 1 && (
+                    <button type="button" onClick={() => setSetting('selectionProcess', form.settings.selectionProcess.filter((_, j) => j !== i))}
+                      className="text-xs px-2 py-0.5 rounded" style={{ color: '#f87171', background: 'rgba(248,113,113,0.1)' }}>
+                      Remove
+                    </button>
+                  )}
+                </div>
+                <Field label="Icon URL">
+                  <Input value={step.icon} onChange={v => setSetting('selectionProcess', form.settings.selectionProcess.map((r, j) => j === i ? { ...r, icon: v } : r))}
+                    placeholder="https://…/icon.png" />
+                </Field>
+                <Field label="Icon Size (px)" hint="Usually 32 or 38">
+                  <Input type="number" value={step.iconSize} onChange={v => setSetting('selectionProcess', form.settings.selectionProcess.map((r, j) => j === i ? { ...r, iconSize: v } : r))}
+                    placeholder="32" />
+                </Field>
+                <Field label="Title">
+                  <Input value={step.title} onChange={v => setSetting('selectionProcess', form.settings.selectionProcess.map((r, j) => j === i ? { ...r, title: v } : r))}
+                    placeholder="Mission Submission" />
+                </Field>
+                <Field label="Description">
+                  <Textarea value={step.body} onChange={v => setSetting('selectionProcess', form.settings.selectionProcess.map((r, j) => j === i ? { ...r, body: v } : r))}
+                    placeholder="Describe this step…" rows={3} />
+                </Field>
+              </div>
+            ))}
+          </div>
+          <button type="button" onClick={() => setSetting('selectionProcess', [...form.settings.selectionProcess, BLANK_STEP_ROW])}
+            className="mt-2 text-xs px-3 py-1.5 rounded-lg font-medium"
+            style={{ background: 'rgba(242,186,48,0.12)', color: 'var(--accent)', border: '1px solid rgba(242,186,48,0.25)' }}>
+            + Add step
+          </button>
         </Section>
 
         {/* WhatsApp — only show for existing events; not critical for first setup */}
