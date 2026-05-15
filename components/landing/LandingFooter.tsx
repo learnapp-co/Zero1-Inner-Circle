@@ -1,5 +1,7 @@
 import type { LandingEvent } from './types'
-import { ASSET_ZERO1_LOGO_NAV, ASSET_ZERO1_LOGO_FOOTER, ASSET_INSTAGRAM, ASSET_EMAIL } from './assets'
+import { ASSET_INSTAGRAM, ASSET_EMAIL } from './assets'
+
+const ZERO1_LOGO = '/zero1-white-logo.svg'
 
 export function LandingFooter({ event }: { event: LandingEvent }) {
   const instagram = event.settings?.instagramUrl
@@ -12,7 +14,7 @@ export function LandingFooter({ event }: { event: LandingEvent }) {
         <div className="flex flex-col items-center" style={{ paddingTop: 50, paddingBottom: 40, gap: 32 }}>
           {/* Zero1 logo */}
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img alt="Zero1" src={ASSET_ZERO1_LOGO_FOOTER} style={{ width: 122, height: 37 }} />
+          <img alt="Zero1" src={ZERO1_LOGO} style={{ width: 122, height: 37 }} />
           {/* Social icons */}
           <div className="flex items-center" style={{ gap: 13 }}>
             <a href={instagram || '#'} target={instagram ? '_blank' : undefined} rel="noopener noreferrer" aria-label="Instagram"
@@ -41,7 +43,8 @@ export function LandingFooter({ event }: { event: LandingEvent }) {
         <div className="absolute" style={{ left: 116, top: 40, width: 1202, borderTop: '2px solid #171717' }} />
         {/* Zero1 logo — left */}
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img alt="Zero1" src={ASSET_ZERO1_LOGO_NAV}
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img alt="Zero1" src={ZERO1_LOGO}
           style={{ position: 'absolute', left: 150, top: 76, width: 138, height: 42 }} />
         {/* copyright — centre */}
         <p style={{

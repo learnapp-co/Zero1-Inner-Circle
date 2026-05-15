@@ -1,5 +1,6 @@
 import type { LandingEvent } from './types'
-import { ASSET_ZERO1_LOGO_NAV } from './assets'
+
+const ZERO1_LOGO = '/zero1-white-logo.svg'
 
 /*
  * Desktop sticky nav (Figma 5768:2698):
@@ -23,7 +24,8 @@ export function LandingNav({ event }: { event: LandingEvent }) {
         borderRadius: 16,
       }}
     >
-      <img alt="Zero1" src={event.settings?.navLogoUrl || ASSET_ZERO1_LOGO_NAV} style={{ width: 119, height: 36 }} />
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img alt="Zero1" src={event.settings?.navLogoUrl || ZERO1_LOGO} style={{ width: 119, height: 36 }} />
 
       <a
         href={missionUrl}

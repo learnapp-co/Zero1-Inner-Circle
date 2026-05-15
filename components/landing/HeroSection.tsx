@@ -17,7 +17,7 @@ import { sanitizeUrl } from './sanitizeUrl'
  *   subtitle at 14px below wordmark (gap 8px)
  */
 
-const BOLT_MOBILE    = 'https://www.figma.com/api/mcp/asset/4c488797-49be-4926-9d2e-d65640022ae8' // Group48096174
+const BOLT_MOBILE    = '/zero1-white-logo.svg'
 const WORDMARK_MOBILE  = 'https://www.figma.com/api/mcp/asset/f05b23b1-bd08-488d-97a5-028d17e4f8a0' // Group8
 const WORDMARK_DESKTOP = 'https://www.figma.com/api/mcp/asset/59f6740d-7f96-4a31-bb60-87f92ec2834e'
 
