@@ -101,18 +101,6 @@ export function UpcomingEvents({ event }: { event: LandingEvent }) {
                   </p>
                 ))}
               </div>
-              {event.settings?.eventAbout && (
-                <p style={{
-                  fontFamily: 'Inter,sans-serif',
-                  fontStyle: 'italic',
-                  fontSize: 9.7,
-                  lineHeight: 'normal',
-                  color: '#fff',
-                  margin: 0,
-                }}>
-                  {event.settings.eventAbout}
-                </p>
-              )}
             </div>
           )}
 
