@@ -156,7 +156,7 @@ export async function PATCH(req: NextRequest) {
             price:        eventFields.price        ?? '',
             heroImageUrl: eventFields.heroImageUrl ?? '',
             maxCapacity:  eventFields.maxCapacity  ?? 30,
-            isActive:     eventFields.isActive     ?? false,
+            isActive:     eventFields.isActive     ?? true,
             settings: {
               create: {
                 accentColor:              settings?.accentColor              ?? '#F2BA30',

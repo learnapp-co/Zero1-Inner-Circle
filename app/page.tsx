@@ -8,7 +8,6 @@ async function getEvent(): Promise<LandingEvent | null> {
   try {
     const event = await prisma.event.findFirst({
       orderBy: { createdAt: 'desc' },
-      where: { isActive: true },
       include: { settings: true },
     })
     if (!event) return null
