@@ -19,7 +19,7 @@ const ICON_FALLBACKS = [ASSET_ICON_STACK_ALT, ASSET_ICON_MONEY_ALT, ASSET_ICON_B
  * Each card:
  *   - flex-col, gap 18px between icon and text group
  *   - icon: 28×28px
- *   - text group: gap 8px (title 18px Satoshi Medium, desc 13px Satoshi Regular #b7b5bb)
+ *   - text group: gap 8px (title 18px Inter Medium, desc 13px Inter Regular #b7b5bb)
  */
 
 const DEFAULT_ACTIVITIES: ActivityItem[] = [

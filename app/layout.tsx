@@ -1,12 +1,5 @@
 import type { Metadata, Viewport } from 'next'
-import localFont from 'next/font/local'
 import './globals.css'
-
-const geistSans = localFont({
-  src: './fonts/GeistVF.woff',
-  variable: '--font-geist-sans',
-  weight: '100 900',
-})
 
 export const metadata: Metadata = {
   title: 'Zero1 Money Circle',
@@ -27,7 +20,7 @@ export const viewport: Viewport = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
-      <body className={`${geistSans.variable} antialiased`}>{children}</body>
+      <body className="antialiased">{children}</body>
     </html>
   )
 }

@@ -11,7 +11,7 @@ import { SectionTitle } from './SectionTitle'
  * Event card: 820×457px desktop / full-width mobile (aspect 820/457).
  * Gradient: linear-gradient(1.17deg, #0f071a 11.92%, rgba(15,7,26,0.705) 48.79%, transparent 99.48%)
  *
- * Title: Gilroy ExtraBold 29.681px, 3-layer stacked via CSS text-shadow:
+ * Title: Inter ExtraBold 29.681px, 3-layer stacked via CSS text-shadow:
  *   - White text on top
  *   - Gold (#f5bd34) shadow at 0 2px
  *   - Orange (#f57434) shadow at 0 4px
@@ -87,7 +87,7 @@ export function UpcomingEvents({ event }: { event: LandingEvent }) {
                 {(['#f57434', '#f5bd34', '#ffffff'] as const).map((color, idx) => (
                   <p key={idx} style={{
                     gridColumn: 1, gridRow: 1,
-                    fontFamily: '"Gilroy-ExtraBold","Gilroy",sans-serif',
+                    fontFamily: 'Inter,sans-serif',
                     fontWeight: 800,
                     fontSize: 11.9,
                     lineHeight: 0.98,

@@ -2,8 +2,8 @@ import { ASSET_LINE, ASSET_DIAMOND_MASK, ASSET_DIAMOND_FILL } from './assets'
 
 /*
  * Decorative ——◆ TITLE ◆—— header
- * Mobile:  12px Satoshi Bold, letterSpacing 2.28px
- * Desktop: 28px Satoshi Bold, letterSpacing 5.32px  ← from Figma 6055:4051
+ * Mobile:  12px Inter Bold, letterSpacing 2.28px
+ * Desktop: 28px Inter Bold, letterSpacing 5.32px  ← from Figma 6055:4051
  */
 
 interface Props {

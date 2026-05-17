@@ -8,8 +8,8 @@ import {
 } from './assets'
 
 /*
- * Mobile:  flex-col vertical list, gap-[16px], 14px Satoshi Medium
- * Desktop: 2-row grid — Row1: Date | Location | Time  Row2 (centred): Passes | Price — 18px Satoshi Medium
+ * Mobile:  flex-col vertical list, gap-[16px], 14px Inter Medium
+ * Desktop: 2-row grid — Row1: Date | Location | Time  Row2 (centred): Passes | Price — 18px Inter Medium
  */
 
 function IconCircle({ src, innerSrc, innerSize = 20, innerOffset = 6 }: {

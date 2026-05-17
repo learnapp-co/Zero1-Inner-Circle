@@ -8,7 +8,7 @@ import { sanitizeUrl } from './sanitizeUrl'
  *   "Zero1 presents" + bolt
  *   gap 24px
  *   flex-col gap-24:
- *     flex-col gap-12: wordmark (577×78.5) + subtitle (28px Satoshi Medium Italic white)
+ *     flex-col gap-12: wordmark (577×78.5) + subtitle (28px Inter Medium Italic white)
  *     gap 24px
  *     about paragraphs (18px #b7b5bb text-center)
  * Text overflows below the 690px image — page bg (#0f071a) = gradient end = seamless.
@@ -84,7 +84,7 @@ export function HeroSection({ event }: { event: LandingEvent }) {
               <p style={{
                 gridColumn: 1, gridRow: 1,
                 marginLeft: 62.15, marginTop: 0,
-                fontFamily: '"Instrument Serif",serif',
+                fontFamily: 'Inter,sans-serif',
                 fontStyle: 'italic',
                 fontSize: 17.9,
                 lineHeight: 1,
@@ -147,7 +147,7 @@ export function HeroSection({ event }: { event: LandingEvent }) {
           <div className="flex items-start justify-center" style={{ gap: 4 }}>
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img alt="Zero1" src={BOLT_MOBILE} style={{ width: 119, height: 36, marginTop: 5 }} />
-            <p className="text-white whitespace-nowrap" style={{ fontFamily: '"Instrument Serif",serif', fontStyle: 'italic', fontSize: 35.5, lineHeight: 1 }}>
+            <p className="text-white whitespace-nowrap" style={{ fontFamily: 'Inter,sans-serif', fontStyle: 'italic', fontSize: 35.5, lineHeight: 1 }}>
               presents
             </p>
           </div>

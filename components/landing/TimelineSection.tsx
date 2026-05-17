@@ -8,8 +8,8 @@ import { sanitizeUrl } from './sanitizeUrl'
  * Each card: bg #1c1a1f, border-radius 36px, width 290px
  *   - Image at top: full-width, 243px tall
  *   - Time badge: overlaid on image, top-left, rgba(28,26,31,0.4) pill
- *   - Title: Satoshi Bold 18px white
- *   - Body: Satoshi Medium 13px #c5c4c8
+ *   - Title: Inter Bold 18px white
+ *   - Body: Inter Medium 13px #c5c4c8
  *
  * Desktop 2-column zig-zag layout: left col (0, 2, 4), right col (1, 3)
  * Right column offset down by 123px vs left column.
