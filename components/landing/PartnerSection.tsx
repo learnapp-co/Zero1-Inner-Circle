@@ -11,7 +11,7 @@ export function PartnerSection({ event }: { event: LandingEvent }) {
         <p style={{ fontFamily: 'Inter,sans-serif', fontWeight: 400, fontSize: 12, lineHeight: 'normal', color: '#b7b5bb', letterSpacing: '0.24px', textAlign: 'center' }}>
           In partnership with
         </p>
-        <img alt="Partner" src={logoUrl} style={{ maxHeight: 90, maxWidth: 180, objectFit: 'contain', opacity: 0.2 }} />
+        <img alt="Partner" src={logoUrl} loading="lazy" style={{ maxHeight: 90, maxWidth: 180, objectFit: 'contain', opacity: 0.2 }} />
       </div>
 
       {/* ── Desktop ── */}
@@ -19,7 +19,7 @@ export function PartnerSection({ event }: { event: LandingEvent }) {
         <p style={{ fontFamily: 'Inter,sans-serif', fontWeight: 400, fontSize: 16, lineHeight: 'normal', color: '#b7b5bb', letterSpacing: '0.32px', textAlign: 'center', width: '100%' }}>
           In partnership with
         </p>
-        <img alt="Partner" src={logoUrl} style={{ maxHeight: 160, maxWidth: 290, objectFit: 'contain', opacity: 0.2 }} />
+        <img alt="Partner" src={logoUrl} loading="lazy" style={{ maxHeight: 160, maxWidth: 290, objectFit: 'contain', opacity: 0.2 }} />
       </div>
     </>
   )

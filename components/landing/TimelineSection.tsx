@@ -77,9 +77,9 @@ function Dot() {
   return (
     <div style={{ position: 'relative', width: D_DOT_SZ, height: D_DOT_SZ, flexShrink: 0 }}>
       {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img alt="" src={DOT_OUTER} style={{ position: 'absolute', inset: 0, width: '100%', height: '100%' }} />
+      <img alt="" src={DOT_OUTER} loading="lazy" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%' }} />
       {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img alt="" src={DOT_INNER} style={{ position: 'absolute', left: 5.36, top: 5.36, width: 14.29, height: 14.29 }} />
+      <img alt="" src={DOT_INNER} loading="lazy" style={{ position: 'absolute', left: 5.36, top: 5.36, width: 14.29, height: 14.29 }} />
     </div>
   )
 }
@@ -89,9 +89,9 @@ function MobileDot() {
   return (
     <div style={{ position: 'relative', width: M_DOT_SZ, height: M_DOT_SZ }}>
       {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img alt="" src={DOT_OUTER} style={{ position: 'absolute', inset: 0, width: '100%', height: '100%' }} />
+      <img alt="" src={DOT_OUTER} loading="lazy" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%' }} />
       {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img alt="" src={DOT_INNER} style={{ position: 'absolute', left: 3, top: 3, width: 8, height: 8 }} />
+      <img alt="" src={DOT_INNER} loading="lazy" style={{ position: 'absolute', left: 3, top: 3, width: 8, height: 8 }} />
     </div>
   )
 }
@@ -111,7 +111,7 @@ function MobileTimelineCard({ item, defaultBg }: { item: TimelineItem; defaultBg
       <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
         <div style={{ height: 116.682, borderRadius: 9.603, overflow: 'hidden', flexShrink: 0 }}>
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img alt="" src={imgSrc} style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
+          <img alt="" src={imgSrc} loading="lazy" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
         </div>
         <div style={{ display: 'flex', flexDirection: 'column' }}>
           <p style={{ fontFamily: 'Inter,sans-serif', fontWeight: 700, fontSize: 12, lineHeight: '16px', color: '#fff', margin: 0 }}>
@@ -167,6 +167,7 @@ function TimelineCard({
           <img
             alt=""
             src={imgSrc}
+            loading="lazy"
             style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
           />
           {/* Time badge */}
@@ -308,7 +309,7 @@ export function TimelineSection({ event }: { event: LandingEvent }) {
                 height: mVLineH,
               }}>
                 {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img alt="" src={V_LINE} style={{ width: 1, height: '100%', display: 'block' }} />
+                <img alt="" src={V_LINE} loading="lazy" style={{ width: 1, height: '100%', display: 'block' }} />
               </div>
 
               {/* Left column cards */}
@@ -346,7 +347,7 @@ export function TimelineSection({ event }: { event: LandingEvent }) {
                   width: M_H_CONN_L, height: 1, overflow: 'hidden',
                 }}>
                   {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img alt="" src={H_CONN_L} style={{ width: '100%', height: 1, display: 'block' }} />
+                  <img alt="" src={H_CONN_L} loading="lazy" style={{ width: '100%', height: 1, display: 'block' }} />
                 </div>
               ))}
 
@@ -357,7 +358,7 @@ export function TimelineSection({ event }: { event: LandingEvent }) {
                   width: M_H_CONN_R, height: 1, overflow: 'hidden',
                 }}>
                   {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img alt="" src={H_CONN_R} style={{ width: '100%', height: 1, display: 'block' }} />
+                  <img alt="" src={H_CONN_R} loading="lazy" style={{ width: '100%', height: 1, display: 'block' }} />
                 </div>
               ))}
 
@@ -380,7 +381,7 @@ export function TimelineSection({ event }: { event: LandingEvent }) {
             height: V_LINE_H,
           }}>
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img alt="" src={V_LINE} style={{ width: 1, height: '100%', display: 'block' }} />
+            <img alt="" src={V_LINE} loading="lazy" style={{ width: 1, height: '100%', display: 'block' }} />
           </div>
 
           {/* Left column cards */}
@@ -435,7 +436,7 @@ export function TimelineSection({ event }: { event: LandingEvent }) {
                 overflow: 'hidden',
               }}>
                 {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img alt="" src={H_CONN_L} style={{ width: '100%', height: 1, display: 'block' }} />
+                <img alt="" src={H_CONN_L} loading="lazy" style={{ width: '100%', height: 1, display: 'block' }} />
               </div>
             )
           ))}
@@ -452,7 +453,7 @@ export function TimelineSection({ event }: { event: LandingEvent }) {
                 overflow: 'hidden',
               }}>
                 {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img alt="" src={H_CONN_R} style={{ width: '100%', height: 1, display: 'block' }} />
+                <img alt="" src={H_CONN_R} loading="lazy" style={{ width: '100%', height: 1, display: 'block' }} />
               </div>
             )
           ))}

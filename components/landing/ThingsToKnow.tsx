@@ -24,7 +24,7 @@ function Item({ item, index, size }: { item: ThingsToKnowItem; index: number; si
     <div className="flex items-start" style={{ gap: 8 }}>
       <div style={{ width: iconSize, height: iconSize, flexShrink: 0 }}>
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img alt="" src={iconSrc} style={{ width: iconSize, height: iconSize, objectFit: 'contain', display: 'block' }} />
+        <img alt="" src={iconSrc} loading="lazy" style={{ width: iconSize, height: iconSize, objectFit: 'contain', display: 'block' }} />
       </div>
       <p style={{ fontFamily: 'Inter,sans-serif', fontWeight: 500, fontSize: fs, lineHeight: lh, color: '#c5c4c8' }}>{renderText(item.text)}</p>
     </div>

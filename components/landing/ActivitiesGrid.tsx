@@ -57,7 +57,7 @@ function ActivityCard({ item, index, desktop }: { item: ActivityItem; index: num
   return (
     <div className="flex flex-col items-start" style={{ gap: 18 }}>
       {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img alt="" src={iconSrc} style={{ width: desktop ? 28 : 24, height: desktop ? 28 : 24 }} />
+      <img alt="" src={iconSrc} loading="lazy" style={{ width: desktop ? 28 : 24, height: desktop ? 28 : 24 }} />
       <div className="flex flex-col" style={{ gap: 8 }}>
         <p style={{
           fontFamily: 'Inter,sans-serif', fontWeight: 500,

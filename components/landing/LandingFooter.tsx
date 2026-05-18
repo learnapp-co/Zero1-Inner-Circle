@@ -14,18 +14,18 @@ export function LandingFooter({ event }: { event: LandingEvent }) {
         <div className="flex flex-col items-center" style={{ paddingTop: 50, paddingBottom: 40, gap: 32 }}>
           {/* Zero1 logo */}
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img alt="Zero1" src={ZERO1_LOGO} style={{ width: 122, height: 37 }} />
+          <img alt="Zero1" src={ZERO1_LOGO} loading="lazy" style={{ width: 122, height: 37 }} />
           {/* Social icons */}
           <div className="flex items-center" style={{ gap: 13 }}>
             <a href={instagram || '#'} target={instagram ? '_blank' : undefined} rel="noopener noreferrer" aria-label="Instagram"
               style={{ width: 32, height: 32, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img alt="Instagram" src={ASSET_INSTAGRAM} style={{ width: 32, height: 32 }} />
+              <img alt="Instagram" src={ASSET_INSTAGRAM} loading="lazy" style={{ width: 32, height: 32 }} />
             </a>
             <a href={email ? `mailto:${email}` : '#'} aria-label="Email"
               style={{ width: 32, height: 32, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img alt="Email" src={ASSET_EMAIL} style={{ width: 32, height: 32 }} />
+              <img alt="Email" src={ASSET_EMAIL} loading="lazy" style={{ width: 32, height: 32 }} />
             </a>
           </div>
           {/* Copyright */}
@@ -43,8 +43,7 @@ export function LandingFooter({ event }: { event: LandingEvent }) {
         <div className="absolute" style={{ left: 116, top: 40, width: 1202, borderTop: '2px solid #171717' }} />
         {/* Zero1 logo — left */}
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img alt="Zero1" src={ZERO1_LOGO}
+        <img alt="Zero1" src={ZERO1_LOGO} loading="lazy"
           style={{ position: 'absolute', left: 150, top: 76, width: 139, height: 42 }} />
         {/* copyright — centre */}
         <p style={{
@@ -59,12 +58,12 @@ export function LandingFooter({ event }: { event: LandingEvent }) {
           <a href={instagram || '#'} target={instagram ? '_blank' : undefined} rel="noopener noreferrer" aria-label="Instagram"
             style={{ width: 32, height: 32, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img alt="Instagram" src={ASSET_INSTAGRAM} style={{ width: 32, height: 32 }} />
+            <img alt="Instagram" src={ASSET_INSTAGRAM} loading="lazy" style={{ width: 32, height: 32 }} />
           </a>
           <a href={email ? `mailto:${email}` : '#'} aria-label="Email"
             style={{ width: 32, height: 32, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img alt="Email" src={ASSET_EMAIL} style={{ width: 32, height: 32 }} />
+            <img alt="Email" src={ASSET_EMAIL} loading="lazy" style={{ width: 32, height: 32 }} />
           </a>
         </div>
       </div>

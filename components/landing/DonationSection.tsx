@@ -1,3 +1,4 @@
+import Image from 'next/image'
 import type { LandingEvent } from './types'
 import { ASSET_HERO_IMG1 } from './assets'
 import { sanitizeUrl } from './sanitizeUrl'
@@ -35,18 +36,15 @@ export function DonationSection({ event }: { event: LandingEvent }) {
 
         {/* Photo collage: left 186×160, right 135×(77+7+75), gap 7px, rounded 9.577px */}
         <div className="flex" style={{ marginTop: 20, gap: 7, height: 160 }}>
-          <div style={{ width: 186, height: 160, borderRadius: 9.577, overflow: 'hidden', flexShrink: 0 }}>
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img alt="" src={img1} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+          <div style={{ position: 'relative', width: 186, height: 160, borderRadius: 9.577, overflow: 'hidden', flexShrink: 0 }}>
+            <Image alt="" src={img1} fill sizes="186px" className="object-cover" />
           </div>
           <div className="flex flex-col" style={{ width: 135, gap: 7, flexShrink: 0 }}>
-            <div style={{ width: 135, height: 77, borderRadius: 9.577, overflow: 'hidden' }}>
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img alt="" src={img2} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+            <div style={{ position: 'relative', width: 135, height: 77, borderRadius: 9.577, overflow: 'hidden' }}>
+              <Image alt="" src={img2} fill sizes="135px" className="object-cover" />
             </div>
-            <div style={{ width: 135, height: 75, borderRadius: 9.577, overflow: 'hidden' }}>
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img alt="" src={img3} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+            <div style={{ position: 'relative', width: 135, height: 75, borderRadius: 9.577, overflow: 'hidden' }}>
+              <Image alt="" src={img3} fill sizes="135px" className="object-cover" />
             </div>
           </div>
         </div>
@@ -63,7 +61,7 @@ export function DonationSection({ event }: { event: LandingEvent }) {
           </p>
           {partnerLogo ? (
             // eslint-disable-next-line @next/next/no-img-element
-            <img alt="Partner" src={partnerLogo} style={{ maxWidth: 210, height: 40, objectFit: 'contain' }} />
+            <img alt="Partner" src={partnerLogo} loading="lazy" style={{ maxWidth: 210, height: 40, objectFit: 'contain' }} />
           ) : (
             <p style={{ fontFamily: 'Inter,sans-serif', fontWeight: 400, fontSize: 22, letterSpacing: '0.15em', color: '#fff', opacity: 0.3, margin: 0, textTransform: 'uppercase', textAlign: 'center' }}>
               {partnerName}
@@ -80,19 +78,16 @@ export function DonationSection({ event }: { event: LandingEvent }) {
           {/* Photo collage: gap 18px */}
           <div className="flex" style={{ marginTop: 32, gap: 18, height: 358 }}>
             {/* Large left — 466px */}
-            <div className="overflow-hidden rounded-[24px]" style={{ width: 466, flexShrink: 0 }}>
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img alt="" src={img1} className="w-full h-full object-cover" />
+            <div className="overflow-hidden rounded-[24px]" style={{ position: 'relative', width: 466, flexShrink: 0 }}>
+              <Image alt="" src={img1} fill sizes="466px" className="object-cover" />
             </div>
             {/* Two stacked right — 338px each */}
             <div className="flex flex-col" style={{ gap: 18, width: 338, flexShrink: 0 }}>
-              <div className="overflow-hidden rounded-[24px]" style={{ height: 169 }}>
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img alt="" src={img2} className="w-full h-full object-cover" />
+              <div className="overflow-hidden rounded-[24px]" style={{ position: 'relative', height: 169 }}>
+                <Image alt="" src={img2} fill sizes="338px" className="object-cover" />
               </div>
-              <div className="overflow-hidden rounded-[24px]" style={{ height: 169 }}>
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img alt="" src={img3} className="w-full h-full object-cover" />
+              <div className="overflow-hidden rounded-[24px]" style={{ position: 'relative', height: 169 }}>
+                <Image alt="" src={img3} fill sizes="338px" className="object-cover" />
               </div>
             </div>
           </div>
@@ -109,7 +104,7 @@ export function DonationSection({ event }: { event: LandingEvent }) {
             </p>
             {partnerLogo ? (
               // eslint-disable-next-line @next/next/no-img-element
-              <img alt="Partner" src={partnerLogo} style={{ width: 420, height: 54, objectFit: 'contain' }} />
+              <img alt="Partner" src={partnerLogo} loading="lazy" style={{ width: 420, height: 54, objectFit: 'contain' }} />
             ) : (
               <p style={{ fontFamily: '"Inter,sans-serif', fontWeight: 400, fontSize: 36, letterSpacing: '0.15em', color: '#fff', opacity: 0.3, margin: 0, textTransform: 'uppercase', textAlign: 'center' }}>
                 {partnerName}

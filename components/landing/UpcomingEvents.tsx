@@ -1,3 +1,4 @@
+import Image from 'next/image'
 import type { LandingEvent } from './types'
 import {
   ASSET_HERO_IMG2, ASSET_CARD_ICON_DATE, ASSET_CARD_ICON_PASSES, ASSET_INFO_ICON,
@@ -56,11 +57,11 @@ export function UpcomingEvents({ event }: { event: LandingEvent }) {
           className="relative overflow-hidden mx-auto"
           style={{ marginTop: 20, width: 328, height: 249, borderRadius: 9.66 }}
         >
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
+          <Image
             alt="" src={cardImage}
-            className="absolute inset-0 w-full h-full object-cover object-bottom"
-            loading="eager" fetchPriority="high"
+            fill priority
+            sizes="(max-width: 768px) 328px, 900px"
+            className="object-cover object-bottom"
           />
           {/* Gradient overlay — anchored 65px from top */}
           <div style={{
@@ -177,11 +178,11 @@ export function UpcomingEvents({ event }: { event: LandingEvent }) {
 
           {/* Card: 900×506 (16:9) */}
           <div className="relative overflow-hidden rounded-3xl" style={{ marginTop: 24, width: 900, height: 506 }}>
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
+            <Image
               alt="" src={cardImage}
-              className="absolute inset-0 w-full h-full object-cover"
-              loading="eager" fetchPriority="high"
+              fill priority
+              sizes="900px"
+              className="object-cover"
             />
             {/* Subtle bottom gradient — only covers info bar area */}
             <div className="absolute inset-x-0 bottom-0" style={{

@@ -53,7 +53,7 @@ export function SelectionCriteria({ event }: { event: LandingEvent }) {
             <div key={i} className="flex items-start justify-between" style={{ width: 328 }}>
               <div style={{ width: 24, height: 24, flexShrink: 0 }}>
                 {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img alt="" src={step.icon} style={{ width: 24, height: 24 }} />
+                <img alt="" src={step.icon} loading="lazy" style={{ width: 24, height: 24 }} />
               </div>
               <div style={{ width: 304, display: 'flex', flexDirection: 'column', gap: 4 }}>
                 <p style={{ fontFamily: 'Inter,sans-serif', fontWeight: 700, fontSize: 14, lineHeight: '20px', color: '#fff', margin: 0 }}>{step.title}</p>
@@ -80,7 +80,7 @@ export function SelectionCriteria({ event }: { event: LandingEvent }) {
               <div className="shrink-0 flex flex-col items-center" style={{ width: 48 }}>
                 <div className="flex items-center justify-center" style={{ width: 48, height: 48, marginTop: 2 }}>
                   {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img alt="" src={step.icon} style={{ width: step.iconSize, height: step.iconSize }} />
+                  <img alt="" src={step.icon} loading="lazy" style={{ width: step.iconSize, height: step.iconSize }} />
                 </div>
                 {/* Vertical connector line — hidden after last step */}
                 {i < steps.length - 1 && (

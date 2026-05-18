@@ -17,9 +17,9 @@ function IconCircle({ src, innerSrc, innerSize = 20, innerOffset = 6 }: {
 }) {
   return (
     <div className="relative shrink-0" style={{ width: 32, height: 32 }}>
-      <img alt="" src={src} className="absolute inset-0 w-full h-full" />
+      <img alt="" src={src} loading="lazy" className="absolute inset-0 w-full h-full" />
       {innerSrc && (
-        <img alt="" src={innerSrc} className="absolute"
+        <img alt="" src={innerSrc} loading="lazy" className="absolute"
           style={{ left: innerOffset, top: innerOffset, width: innerSize, height: innerSize }} />
       )}
     </div>

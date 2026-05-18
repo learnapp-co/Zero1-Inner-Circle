@@ -22,7 +22,7 @@ function LineDiamond({ flip, large }: { flip?: boolean; large?: boolean }) {
       style={{ width: w, height: 11, transform: flip ? 'scaleX(-1)' : undefined }}
     >
       <div className="absolute" style={{ left: 0, top: 5, width: lineW, height: 1 }}>
-        <img alt="" className="block w-full h-full" src={ASSET_LINE} />
+        <img alt="" className="block w-full h-full" src={ASSET_LINE} loading="lazy" />
       </div>
       <div
         className="absolute overflow-hidden"
@@ -36,7 +36,7 @@ function LineDiamond({ flip, large }: { flip?: boolean; large?: boolean }) {
           maskRepeat: 'no-repeat',
         }}
       >
-        <img alt="" className="block w-full h-full" src={ASSET_DIAMOND_FILL} />
+        <img alt="" className="block w-full h-full" src={ASSET_DIAMOND_FILL} loading="lazy" />
       </div>
     </div>
   )
