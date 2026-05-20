@@ -448,36 +448,25 @@ export default function AttendeesPage() {
             </p>
           ) : (
             <div>
-              {filtered.map((a, idx) => {
+              {filtered.flatMap((a, idx) => {
                 const sc = STATUS_CONFIG[a.status]
                 const isLast = idx === filtered.length - 1
-                return (
+                const hasPlusOne = !!a.plusOneName
+
+                // Primary attendee row
+                const primaryRow = (
                   <div
                     key={a.id}
                     className="grid items-center px-6 hover:bg-white/[0.03] transition-colors"
                     style={{
                       gridTemplateColumns: '1fr 1fr 140px 160px 72px 40px 40px 40px',
                       height: 60,
-                      borderBottom: isLast ? 'none' : '1px solid rgba(37,37,37,0.4)',
+                      borderBottom: hasPlusOne ? '1px solid rgba(37,37,37,0.2)' : (isLast ? 'none' : '1px solid rgba(37,37,37,0.4)'),
                     }}
                   >
-                    {/* Name + optional +1 indicator */}
+                    {/* Name */}
                     <div className="flex flex-col min-w-0 pr-4">
                       <span className="text-sm font-semibold text-white truncate">{a.name}</span>
-                      {a.plusOneName && (
-                        <span className="text-[11px] truncate mt-0.5 flex items-center gap-1" style={{ color: 'rgba(180,160,80,0.8)' }}>
-                          <span
-                            className="inline-block w-1.5 h-1.5 rounded-full flex-shrink-0"
-                            style={{ background: a.plusOneCheckedIn ? '#30b0cf' : 'rgba(180,160,80,0.6)' }}
-                          />
-                          {a.plusOneName} +1
-                          {a.plusOneCheckedIn && a.plusOneCheckedInAt && (
-                            <span style={{ color: '#30b0cf' }}>
-                              · {new Date(a.plusOneCheckedInAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
-                            </span>
-                          )}
-                        </span>
-                      )}
                     </div>
 
                     {/* Phone */}
@@ -524,7 +513,7 @@ export default function AttendeesPage() {
                       )}
                     </div>
 
-                    {/* Col 4 — Check-in status + manual check-in button */}
+                    {/* Check-in status */}
                     <div className="flex items-center gap-2">
                       {a.checkedIn ? (
                         <div className="flex items-center gap-1.5">
@@ -551,7 +540,7 @@ export default function AttendeesPage() {
                       )}
                     </div>
 
-                    {/* Col 5 — Pass */}
+                    {/* Pass */}
                     <div className="flex justify-end">
                       {a.passUrl ? (
                         <a
@@ -566,7 +555,7 @@ export default function AttendeesPage() {
                       ) : <span />}
                     </div>
 
-                    {/* Col 6 — Refresh QR (admin only, regenerates JWT with current secret) */}
+                    {/* Refresh QR */}
                     <div className="flex justify-center">
                       {(a.status === 'SELECTED' || a.status === 'CHECKED_IN') ? (
                         <button
@@ -581,7 +570,7 @@ export default function AttendeesPage() {
                       ) : <span />}
                     </div>
 
-                    {/* Col 7 — WhatsApp */}
+                    {/* WhatsApp */}
                     <div className="flex justify-center">
                       {(a.status === 'SELECTED' || a.status === 'CHECKED_IN') ? (
                         <button
@@ -597,7 +586,7 @@ export default function AttendeesPage() {
                       ) : <span />}
                     </div>
 
-                    {/* Col 8 — Delete */}
+                    {/* Delete */}
                     <div className="flex justify-center">
                       <button
                         onClick={() => handleDelete(a.id)}
@@ -609,6 +598,67 @@ export default function AttendeesPage() {
                     </div>
                   </div>
                 )
+
+                // +1 guest row (virtual - no separate DB record)
+                const plusOneRow = hasPlusOne ? (
+                  <div
+                    key={`${a.id}-plusone`}
+                    className="grid items-center px-6"
+                    style={{
+                      gridTemplateColumns: '1fr 1fr 140px 160px 72px 40px 40px 40px',
+                      height: 48,
+                      background: 'rgba(242,186,48,0.03)',
+                      borderBottom: isLast ? 'none' : '1px solid rgba(37,37,37,0.4)',
+                    }}
+                  >
+                    {/* Name with +1 tag */}
+                    <div className="flex flex-col min-w-0 pr-4 pl-4">
+                      <span className="text-sm truncate flex items-center gap-2" style={{ color: 'rgba(242,186,48,0.9)' }}>
+                        <span className="text-[10px] px-1.5 py-0.5 rounded" style={{ background: 'rgba(242,186,48,0.15)', border: '0.5px solid rgba(242,186,48,0.3)' }}>
+                          {a.name}&rsquo;s +1
+                        </span>
+                        <span className="font-medium">{a.plusOneName}</span>
+                      </span>
+                    </div>
+
+                    {/* Phone */}
+                    <span className="text-[13px] font-mono truncate pr-4" style={{ color: 'rgba(180,160,80,0.7)' }}>
+                      {a.plusOnePhone}
+                    </span>
+
+                    {/* Status */}
+                    <span className="text-xs" style={{ color: 'rgba(180,160,80,0.6)' }}>Guest</span>
+
+                    {/* Check-in status */}
+                    <div className="flex items-center gap-2">
+                      {a.plusOneCheckedIn ? (
+                        <div className="flex items-center gap-1.5">
+                          <span className="w-1.5 h-1.5 rounded-full flex-shrink-0" style={{ background: '#30b0cf' }} />
+                          <span className="text-xs font-medium" style={{ color: '#30b0cf' }}>Checked In</span>
+                          {a.plusOneCheckedInAt && (
+                            <span className="text-xs font-mono" style={{ color: 'rgba(102,102,102,0.7)' }}>
+                              {new Date(a.plusOneCheckedInAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+                            </span>
+                          )}
+                        </div>
+                      ) : (
+                        <span className="text-xs" style={{ color: 'rgba(102,102,102,0.4)' }}>—</span>
+                      )}
+                    </div>
+
+                    {/* No Pass link for +1 (same pass as primary) */}
+                    <div className="flex justify-end">
+                      <span className="text-[10px] px-2 py-1 rounded" style={{ background: 'rgba(242,186,48,0.1)', color: 'rgba(242,186,48,0.7)' }}>
+                        Shared pass
+                      </span>
+                    </div>
+
+                    {/* No actions for +1 */}
+                    <div /><div /><div />
+                  </div>
+                ) : null
+
+                return hasPlusOne ? [primaryRow, plusOneRow] : [primaryRow]
               })}
             </div>
           )}
