@@ -555,7 +555,7 @@ export default function AttendeesPage() {
                     <div className="flex justify-end">
                       {a.passUrl ? (
                         <a
-                          href={a.passUrl}
+                          href={BASE_PATH + a.passUrl}
                           target="_blank"
                           rel="noreferrer"
                           className="h-7 px-2.5 rounded-md text-xs font-semibold flex items-center gap-1 whitespace-nowrap"
