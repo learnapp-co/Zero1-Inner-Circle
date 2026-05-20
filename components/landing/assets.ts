@@ -23,8 +23,8 @@ export const ASSET_DIAMOND_MASK     = '' // pending — provide SVG
 export const ASSET_DIAMOND_FILL     = '' // pending — provide SVG
 
 // ─── Event card info icons ─────────────────────────────────────────────────────
-export const ASSET_CARD_ICON_DATE   = `${LA}/card-icon-date.svg`
-export const ASSET_CARD_ICON_PASSES = '' // pending — provide SVG
+export const ASSET_CARD_ICON_DATE   = `${LA}/partner-logo.svg`   // 22.svg — date icon
+export const ASSET_CARD_ICON_PASSES = `${LA}/card-icon-date.svg` // 23.svg — passes icon
 export const ASSET_INFO_ICON        = `${LA}/info-icon.svg`
 
 // ─── Skills / activity icons (one per default activity) ──────────────────────
@@ -81,11 +81,11 @@ export const ASSET_PEN_6            = `${LA}/pen-6.svg`
 export const ASSET_PEN_7            = `${LA}/pen-7.svg`
 
 // ─── Footer / social icons ────────────────────────────────────────────────────
-export const ASSET_INSTAGRAM        = '' // pending — provide SVG
-export const ASSET_EMAIL            = '' // pending — provide SVG
+export const ASSET_INSTAGRAM        = `${LA}/icon-instagram.svg`
+export const ASSET_EMAIL            = `${LA}/icon-email.svg`
 
 // ─── Partner logo ─────────────────────────────────────────────────────────────
-export const ASSET_PARTNER_LOGO     = `${LA}/partner-logo.svg`
+export const ASSET_PARTNER_LOGO     = '' // pending — provide partner logo separately
 
 // ─── Aliases kept for backward compatibility ──────────────────────────────────
 export const ASSET_LINE_LONG        = ASSET_LINE
