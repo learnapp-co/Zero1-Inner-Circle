@@ -21,7 +21,7 @@ export async function POST(req: NextRequest) {
     const { token } = await req.json() as { token: string }
     if (!token) return Response.json({ error: 'token required' }, { status: 400 })
     // #region agent log
-    fetch('http://127.0.0.1:7298/ingest/0434cb40-b565-43ab-811b-3430eeb9d9f9',{method:'POST',headers:{'Content-Type':'application/json','X-Debug-Session-Id':'a8b584'},body:JSON.stringify({sessionId:'a8b584',location:'verify/route.ts:22',message:'verify called',data:{tokenLen:token?.length,tokenTail:token?.slice(-8)},timestamp:Date.now(),hypothesisId:'B'})}).catch(()=>{});
+    console.log('[DBG-a8b584] verify called', {tokenLen:token?.length,tokenTail:token?.slice(-8),ts:Date.now()});
     // #endregion
 
     // Step 1: decode without verifying signature
@@ -87,7 +87,7 @@ export async function POST(req: NextRequest) {
 
     if (decoded.passType === 'primary') {
       // #region agent log
-      fetch('http://127.0.0.1:7298/ingest/0434cb40-b565-43ab-811b-3430eeb9d9f9',{method:'POST',headers:{'Content-Type':'application/json','X-Debug-Session-Id':'a8b584'},body:JSON.stringify({sessionId:'a8b584',location:'verify/route.ts:88',message:'pre-updateMany state',data:{attendeeId:attendee.id,checkedIn:attendee.checkedIn,checkedInAt:attendee.checkedInAt,status:attendee.status},timestamp:Date.now(),hypothesisId:'A-D'})}).catch(()=>{});
+      console.log('[DBG-a8b584] pre-updateMany', {attendeeId:attendee.id,checkedIn:attendee.checkedIn,checkedInAt:attendee.checkedInAt,status:attendee.status,ts:Date.now()});
       // #endregion
       // Atomic conditional update — prevents race condition on simultaneous scans
       const now = new Date()
@@ -97,7 +97,7 @@ export async function POST(req: NextRequest) {
       })
 
       // #region agent log
-      fetch('http://127.0.0.1:7298/ingest/0434cb40-b565-43ab-811b-3430eeb9d9f9',{method:'POST',headers:{'Content-Type':'application/json','X-Debug-Session-Id':'a8b584'},body:JSON.stringify({sessionId:'a8b584',location:'verify/route.ts:97',message:'updateMany result',data:{attendeeId:attendee.id,updateCount:result.count},timestamp:Date.now(),hypothesisId:'A-B-D'})}).catch(()=>{});
+      console.log('[DBG-a8b584] updateMany result', {attendeeId:attendee.id,updateCount:result.count,ts:Date.now()});
       // #endregion
 
       if (result.count === 0) {
