@@ -20,6 +20,9 @@ export async function POST(req: NextRequest) {
   try {
     const { token } = await req.json() as { token: string }
     if (!token) return Response.json({ error: 'token required' }, { status: 400 })
+    // #region agent log
+    fetch('http://127.0.0.1:7298/ingest/0434cb40-b565-43ab-811b-3430eeb9d9f9',{method:'POST',headers:{'Content-Type':'application/json','X-Debug-Session-Id':'a8b584'},body:JSON.stringify({sessionId:'a8b584',location:'verify/route.ts:22',message:'verify called',data:{tokenLen:token?.length,tokenTail:token?.slice(-8)},timestamp:Date.now(),hypothesisId:'B'})}).catch(()=>{});
+    // #endregion
 
     // Step 1: decode without verifying signature
     let decoded: QRPayload | null = null
@@ -83,12 +86,19 @@ export async function POST(req: NextRequest) {
     }
 
     if (decoded.passType === 'primary') {
+      // #region agent log
+      fetch('http://127.0.0.1:7298/ingest/0434cb40-b565-43ab-811b-3430eeb9d9f9',{method:'POST',headers:{'Content-Type':'application/json','X-Debug-Session-Id':'a8b584'},body:JSON.stringify({sessionId:'a8b584',location:'verify/route.ts:88',message:'pre-updateMany state',data:{attendeeId:attendee.id,checkedIn:attendee.checkedIn,checkedInAt:attendee.checkedInAt,status:attendee.status},timestamp:Date.now(),hypothesisId:'A-D'})}).catch(()=>{});
+      // #endregion
       // Atomic conditional update — prevents race condition on simultaneous scans
       const now = new Date()
       const result = await prisma.attendee.updateMany({
         where: { id: attendee.id, checkedIn: false },
         data: { checkedIn: true, checkedInAt: now, status: AttendeeStatus.CHECKED_IN },
       })
+
+      // #region agent log
+      fetch('http://127.0.0.1:7298/ingest/0434cb40-b565-43ab-811b-3430eeb9d9f9',{method:'POST',headers:{'Content-Type':'application/json','X-Debug-Session-Id':'a8b584'},body:JSON.stringify({sessionId:'a8b584',location:'verify/route.ts:97',message:'updateMany result',data:{attendeeId:attendee.id,updateCount:result.count},timestamp:Date.now(),hypothesisId:'A-B-D'})}).catch(()=>{});
+      // #endregion
 
       if (result.count === 0) {
         // Already checked in — return existing state (no extra DB query needed)

@@ -117,6 +117,9 @@ export default function QRScanner({ onResult }: Props) {
     }
 
     async function handleToken(token: string) {
+      // #region agent log
+      fetch('http://127.0.0.1:7298/ingest/0434cb40-b565-43ab-811b-3430eeb9d9f9',{method:'POST',headers:{'Content-Type':'application/json','X-Debug-Session-Id':'a8b584'},body:JSON.stringify({sessionId:'a8b584',location:'QRScanner.tsx:handleToken',message:'scanner fired token to API',data:{tokenLen:token.length,tokenTail:token.slice(-8),ts:Date.now()},timestamp:Date.now(),hypothesisId:'B-C'})}).catch(()=>{});
+      // #endregion
       try {
         const res  = await fetch(BASE_PATH + '/api/admin/checkin/verify', {
           method:  'POST',
@@ -124,6 +127,9 @@ export default function QRScanner({ onResult }: Props) {
           body:    JSON.stringify({ token }),
         })
         const data = await res.json()
+        // #region agent log
+        fetch('http://127.0.0.1:7298/ingest/0434cb40-b565-43ab-811b-3430eeb9d9f9',{method:'POST',headers:{'Content-Type':'application/json','X-Debug-Session-Id':'a8b584'},body:JSON.stringify({sessionId:'a8b584',location:'QRScanner.tsx:handleToken-response',message:'API response received',data:{status:data.status,ts:Date.now()},timestamp:Date.now(),hypothesisId:'B-C'})}).catch(()=>{});
+        // #endregion
         onResultRef.current(data)
       } catch {
         onResultRef.current({ status: 'INVALID_QR', message: 'Network error' })
