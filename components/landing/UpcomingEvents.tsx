@@ -48,26 +48,26 @@ export function UpcomingEvents({ event }: { event: LandingEvent }) {
         </div>
 
         {/*
-          Card: 328×249px, borderRadius 9.659px, centered.
-          Gradient starts at top:65px, height 184px (Figma 6120:7527).
-          Event title at top:21px (Figma 6120:7544).
-          Info bar at top:190px (Figma 6122:7553).
+          Card: 328px wide, aspect ratio matches desktop (900:506 ≈ 16:9).
+          Height flows from aspect ratio so the image is never cropped horizontally.
+          Gradient and info bar anchored to bottom.
+          Event title at top:21px.
         */}
         <div
           className="relative overflow-hidden mx-auto"
-          style={{ marginTop: 20, width: 328, height: 249, borderRadius: 9.66 }}
+          style={{ marginTop: 20, width: 328, aspectRatio: '900 / 506', borderRadius: 9.66 }}
         >
           <Image
             alt="" src={cardImage}
             fill priority
             unoptimized={isExternalUrl(cardImage)}
             sizes="(max-width: 768px) 328px, 900px"
-            className="object-cover object-bottom"
+            className="object-cover"
           />
-          {/* Gradient overlay — anchored 65px from top */}
+          {/* Gradient overlay — anchored to bottom, covers lower 60% */}
           <div style={{
-            position: 'absolute', left: 0, top: 65, width: '100%', height: 184,
-            background: 'linear-gradient(1.17deg, #0f071a 11.92%, rgba(15,7,26,0.705) 48.79%, transparent 99.48%)',
+            position: 'absolute', left: 0, bottom: 0, width: '100%', height: '60%',
+            background: 'linear-gradient(to top, #0f071a 0%, rgba(15,7,26,0.705) 50%, transparent 100%)',
           }} />
 
           {/* Event title overlay — top:21px, centered, 152px wide */}
@@ -106,9 +106,9 @@ export function UpcomingEvents({ event }: { event: LandingEvent }) {
             </div>
           )}
 
-          {/* Info bar at top:190px */}
+          {/* Info bar — anchored to bottom */}
           <div style={{
-            position: 'absolute', top: 190,
+            position: 'absolute', bottom: 14,
             left: '50%', transform: 'translateX(-50.5%)',
             width: 317,
             display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between',
