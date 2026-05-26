@@ -10,6 +10,8 @@ import type { LandingEvent } from './types'
  */
 export function MissionBar({ event }: { event: LandingEvent }) {
   const missionUrl = event.settings?.missionFormUrl || '#'
+  const enabled = event.settings?.missionFormEnabled !== false
+  const btnText = event.settings?.missionFormButtonText || 'Start mission'
 
   return (
     <div
@@ -25,14 +27,17 @@ export function MissionBar({ event }: { event: LandingEvent }) {
       {/* CTA button at y=22 */}
       <div className="absolute left-4 right-4" style={{ top: 22 }}>
         <a
-          href={missionUrl}
-          target="_blank"
-          rel="noopener noreferrer"
+          href={enabled ? missionUrl : undefined}
+          target={enabled ? '_blank' : undefined}
+          rel={enabled ? 'noopener noreferrer' : undefined}
           className="flex items-center justify-center rounded-lg w-full"
           style={{
             height: 42,
-            background: '#f5bd34',
-            border: '1px solid #f5bd34',
+            background: enabled ? '#f5bd34' : '#888',
+            border: enabled ? '1px solid #f5bd34' : '1px solid #888',
+            opacity: enabled ? 1 : 0.4,
+            cursor: enabled ? 'pointer' : 'not-allowed',
+            pointerEvents: enabled ? 'auto' : 'none',
           }}
         >
           <span
@@ -44,7 +49,7 @@ export function MissionBar({ event }: { event: LandingEvent }) {
               color: '#000',
             }}
           >
-            Start mission
+            {btnText}
           </span>
         </a>
       </div>

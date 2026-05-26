@@ -12,13 +12,15 @@ async function getEvent(): Promise<LandingEvent | null> {
     })
     if (!event) return null
 
-    // Stale Prisma module workaround: inject selectionProcess via raw SQL
+    // Stale Prisma module workaround: inject fields the in-memory module doesn't SELECT
     if (event.settings) {
-      const raw = await prisma.$queryRaw<Array<{ selectionProcess: unknown }>>`
-        SELECT "selectionProcess" FROM "EventSettings" WHERE "eventId" = ${event.id}
+      const raw = await prisma.$queryRaw<Array<{ selectionProcess: unknown; missionFormEnabled: boolean; missionFormButtonText: string | null }>>`
+        SELECT "selectionProcess", "missionFormEnabled", "missionFormButtonText" FROM "EventSettings" WHERE "eventId" = ${event.id}
       `
       if (raw[0] !== undefined) {
         ;(event.settings as Record<string, unknown>).selectionProcess = raw[0].selectionProcess
+        ;(event.settings as Record<string, unknown>).missionFormEnabled = raw[0].missionFormEnabled
+        ;(event.settings as Record<string, unknown>).missionFormButtonText = raw[0].missionFormButtonText
       }
     }
 
@@ -39,6 +41,8 @@ async function getEvent(): Promise<LandingEvent | null> {
             allowPlusOne: s.allowPlusOne,
             logoUrl: s.logoUrl ?? null,
             missionFormUrl: s.missionFormUrl ?? null,
+            missionFormEnabled: s.missionFormEnabled,
+            missionFormButtonText: (s as Record<string, unknown>).missionFormButtonText as string | null ?? null,
             instagramUrl: s.instagramUrl ?? null,
             emailAddress: s.emailAddress ?? null,
             aboutText: s.aboutText ?? null,

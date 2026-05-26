@@ -28,6 +28,8 @@ export type EventSettings = {
   allowPlusOne: boolean
   logoUrl: string | null
   missionFormUrl: string | null
+  missionFormEnabled: boolean
+  missionFormButtonText: string | null
   instagramUrl: string | null
   emailAddress: string | null
   aboutText: string | null

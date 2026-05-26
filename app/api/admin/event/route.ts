@@ -12,14 +12,15 @@ export async function GET(req: NextRequest) {
           include: { settings: true },
         })
 
-    // Stale Prisma module workaround: inject selectionProcess via raw SQL
-    // (the in-memory module pre-dates this field and doesn't SELECT it)
+    // Stale Prisma module workaround: inject fields the in-memory module doesn't SELECT
     if (event?.settings) {
-      const raw = await prisma.$queryRaw<Array<{ selectionProcess: unknown }>>`
-        SELECT "selectionProcess" FROM "EventSettings" WHERE "eventId" = ${event.id}
+      const raw = await prisma.$queryRaw<Array<{ selectionProcess: unknown; missionFormEnabled: boolean; missionFormButtonText: string | null }>>`
+        SELECT "selectionProcess", "missionFormEnabled", "missionFormButtonText" FROM "EventSettings" WHERE "eventId" = ${event.id}
       `
       if (raw[0] !== undefined) {
         ;(event.settings as Record<string, unknown>).selectionProcess = raw[0].selectionProcess
+        ;(event.settings as Record<string, unknown>).missionFormEnabled = raw[0].missionFormEnabled
+        ;(event.settings as Record<string, unknown>).missionFormButtonText = raw[0].missionFormButtonText
       }
     }
 
@@ -116,6 +117,8 @@ export async function PATCH(req: NextRequest) {
         whatsappTemplateReminder?: string
         whatsappTemplatePlusOne?: string
         missionFormUrl?: string
+        missionFormEnabled?: boolean
+        missionFormButtonText?: string
         instagramUrl?: string
         emailAddress?: string
         aboutText?: string
@@ -176,10 +179,8 @@ export async function PATCH(req: NextRequest) {
       id = existing.id
     }
 
-    // Strip selectionProcess — the stale in-memory Prisma module (before dev-server restart)
-    // rejects this field in the validator even though it exists in the schema.
-    // It is written separately via $executeRaw which bypasses the JS-level validator.
-    const { selectionProcess, ...settingsForPrisma } = settings ?? {}
+    // Strip fields the stale in-memory Prisma module doesn't know about — written via $executeRaw.
+    const { selectionProcess, missionFormEnabled, missionFormButtonText, ...settingsForPrisma } = settings ?? {}
 
     const event = await prisma.event.update({
       where: { id },
@@ -223,11 +224,25 @@ export async function PATCH(req: NextRequest) {
       include: { settings: true },
     })
 
-    // Write selectionProcess via raw SQL — bypasses the stale Prisma module validator
+    // Write fields the stale Prisma module rejects — bypasses the JS-level validator via raw SQL
     if (selectionProcess !== undefined) {
       await prisma.$executeRaw`
         UPDATE "EventSettings"
         SET "selectionProcess" = ${JSON.stringify(selectionProcess)}::jsonb
+        WHERE "eventId" = ${id}
+      `
+    }
+    if (missionFormEnabled !== undefined) {
+      await prisma.$executeRaw`
+        UPDATE "EventSettings"
+        SET "missionFormEnabled" = ${missionFormEnabled}
+        WHERE "eventId" = ${id}
+      `
+    }
+    if (missionFormButtonText !== undefined) {
+      await prisma.$executeRaw`
+        UPDATE "EventSettings"
+        SET "missionFormButtonText" = ${missionFormButtonText ?? null}
         WHERE "eventId" = ${id}
       `
     }

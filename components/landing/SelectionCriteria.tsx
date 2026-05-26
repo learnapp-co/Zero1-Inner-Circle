@@ -39,6 +39,8 @@ const DEFAULT_STEPS: SelectionProcessItem[] = [
 
 export function SelectionCriteria({ event }: { event: LandingEvent }) {
   const missionUrl = event.settings?.missionFormUrl || '#'
+  const enabled = event.settings?.missionFormEnabled !== false
+  const btnText = event.settings?.missionFormButtonText || 'Start mission'
   const steps = event.settings?.selectionProcess?.length
     ? event.settings.selectionProcess
     : DEFAULT_STEPS
@@ -64,10 +66,19 @@ export function SelectionCriteria({ event }: { event: LandingEvent }) {
           ))}
         </div>
         {/* Start mission: 312px wide, 42px tall, centred */}
-        <a href={missionUrl} target="_blank" rel="noopener noreferrer"
+        <a
+          href={enabled ? missionUrl : undefined}
+          target={enabled ? '_blank' : undefined}
+          rel={enabled ? 'noopener noreferrer' : undefined}
           className="flex items-center justify-center rounded-lg"
-          style={{ width: 312, height: 42, background: '#f5bd34', margin: '0 auto', marginTop: 12 }}>
-          <span style={{ fontFamily: 'Inter,sans-serif', fontWeight: 500, fontSize: 14, color: '#000' }}>Start mission</span>
+          style={{
+            width: 312, height: 42, margin: '0 auto', marginTop: 12,
+            background: enabled ? '#f5bd34' : '#888',
+            opacity: enabled ? 1 : 0.4,
+            cursor: enabled ? 'pointer' : 'not-allowed',
+            pointerEvents: enabled ? 'auto' : 'none',
+          }}>
+          <span style={{ fontFamily: 'Inter,sans-serif', fontWeight: 500, fontSize: 14, color: '#000' }}>{btnText}</span>
         </a>
       </div>
 
@@ -97,10 +108,19 @@ export function SelectionCriteria({ event }: { event: LandingEvent }) {
           ))}
         </div>
         {/* Full-width CTA */}
-        <a href={missionUrl} target="_blank" rel="noopener noreferrer"
+        <a
+          href={enabled ? missionUrl : undefined}
+          target={enabled ? '_blank' : undefined}
+          rel={enabled ? 'noopener noreferrer' : undefined}
           className="flex items-center justify-center rounded-lg"
-          style={{ width: '100%', height: 53, background: '#f5bd34' }}>
-          <span style={{ fontFamily: 'Inter,sans-serif', fontWeight: 500, fontSize: 18, color: '#000' }}>Start mission</span>
+          style={{
+            width: '100%', height: 53,
+            background: enabled ? '#f5bd34' : '#888',
+            opacity: enabled ? 1 : 0.4,
+            cursor: enabled ? 'pointer' : 'not-allowed',
+            pointerEvents: enabled ? 'auto' : 'none',
+          }}>
+          <span style={{ fontFamily: 'Inter,sans-serif', fontWeight: 500, fontSize: 18, color: '#000' }}>{btnText}</span>
         </a>
       </div>
     </>

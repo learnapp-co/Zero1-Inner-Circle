@@ -28,6 +28,8 @@ type MeetupSettingsForm = {
     // About
     eventAbout: string
     missionFormUrl: string
+    missionFormEnabled: boolean
+    missionFormButtonText: string
     sessionDescription: string
     // Branding
     accentColor: string
@@ -81,6 +83,8 @@ const DEFAULTS: MeetupSettingsForm = {
     eventCardSubtitle: '',
     eventAbout: '',
     missionFormUrl: '',
+    missionFormEnabled: true,
+    missionFormButtonText: '',
     sessionDescription: '',
     accentColor: '#F2BA30',
     navLogoUrl: '',
@@ -141,8 +145,10 @@ export default function MeetupSettingsPage() {
               eventCardImageUrl:  s?.eventCardImageUrl  ?? '',
               eventCardSubtitle:  s?.eventCardSubtitle  ?? '',
               eventAbout:         s?.eventAbout         ?? '',
-              missionFormUrl:     s?.missionFormUrl     ?? '',
-              sessionDescription: s?.sessionDescription ?? '',
+              missionFormUrl:       s?.missionFormUrl       ?? '',
+              missionFormEnabled:   s?.missionFormEnabled   ?? true,
+              missionFormButtonText: (s as Record<string, unknown>)?.missionFormButtonText as string ?? '',
+              sessionDescription:   s?.sessionDescription   ?? '',
               accentColor:        s?.accentColor        ?? '#F2BA30',
               navLogoUrl:         s?.navLogoUrl         ?? '',
               logoUrl:            s?.logoUrl            ?? '',
@@ -254,8 +260,10 @@ export default function MeetupSettingsPage() {
         eventCardImageUrl:  form.settings.eventCardImageUrl  || undefined,
         eventCardSubtitle:  form.settings.eventCardSubtitle  || null,
         eventAbout:         form.settings.eventAbout         || undefined,
-        missionFormUrl:     form.settings.missionFormUrl     || undefined,
-        sessionDescription: form.settings.sessionDescription || undefined,
+        missionFormUrl:        form.settings.missionFormUrl        || undefined,
+        missionFormEnabled:    form.settings.missionFormEnabled,
+        missionFormButtonText: form.settings.missionFormButtonText || undefined,
+        sessionDescription:    form.settings.sessionDescription    || undefined,
         accentColor:        form.settings.accentColor,
         allowPlusOne:       form.settings.allowPlusOne,
         navLogoUrl:         form.settings.navLogoUrl         || undefined,
@@ -402,6 +410,31 @@ export default function MeetupSettingsPage() {
           <Field label="Mission Form URL" hint='Link the "Start your mission" button points to'>
             <Input value={form.settings.missionFormUrl} onChange={v => setSetting('missionFormUrl', v)}
               placeholder="https://forms.gle/…" />
+          </Field>
+          <Field label="Button Copy" hint='Label shown on the CTA button (leave blank to use default "Start mission")'>
+            <Input value={form.settings.missionFormButtonText} onChange={v => setSetting('missionFormButtonText', v)}
+              placeholder="Start mission" />
+          </Field>
+          <Field label="Enable Mission Button" hint='Toggle off to grey out the "Start mission" button everywhere on the landing page'>
+            <div className="flex items-center gap-3">
+              <button
+                type="button"
+                onClick={() => setSetting('missionFormEnabled', !form.settings.missionFormEnabled)}
+                className="relative flex-shrink-0"
+                style={{ width: 40, height: 24, borderRadius: 12, border: 'none', padding: 0,
+                         background: form.settings.missionFormEnabled ? 'var(--accent)' : 'var(--border)',
+                         cursor: 'pointer', transition: 'background 0.2s' }}
+              >
+                <span
+                  className="absolute top-1"
+                  style={{ left: form.settings.missionFormEnabled ? 18 : 2, width: 16, height: 16,
+                           borderRadius: '50%', background: '#fff', transition: 'left 0.2s' }}
+                />
+              </button>
+              <span style={{ fontSize: 13, color: 'var(--muted)' }}>
+                {form.settings.missionFormEnabled ? 'Button is active' : 'Button is greyed out'}
+              </span>
+            </div>
           </Field>
         </Section>
 

@@ -12,6 +12,8 @@ const ZERO1_LOGO = BASE_PATH + '/zero1-white-logo.svg'
  */
 export function LandingNav({ event }: { event: LandingEvent }) {
   const missionUrl = event.settings?.missionFormUrl || '#'
+  const enabled = event.settings?.missionFormEnabled !== false
+  const btnText = event.settings?.missionFormButtonText || 'Start mission'
 
   return (
     /* Only visible on desktop (md+) */
@@ -30,14 +32,22 @@ export function LandingNav({ event }: { event: LandingEvent }) {
       <img alt="Zero1" src={resolveMediaUrl(event.settings?.navLogoUrl) || ZERO1_LOGO} style={{ width: 119, height: 36 }} />
 
       <a
-        href={missionUrl}
-        target="_blank"
-        rel="noopener noreferrer"
+        href={enabled ? missionUrl : undefined}
+        target={enabled ? '_blank' : undefined}
+        rel={enabled ? 'noopener noreferrer' : undefined}
         className="flex items-center justify-center rounded-lg"
-        style={{ width: 205, height: 53, background: '#f5bd34', border: '1px solid #f5bd34' }}
+        style={{
+          width: 205,
+          height: 53,
+          background: enabled ? '#f5bd34' : '#888',
+          border: enabled ? '1px solid #f5bd34' : '1px solid #888',
+          opacity: enabled ? 1 : 0.4,
+          cursor: enabled ? 'pointer' : 'not-allowed',
+          pointerEvents: enabled ? 'auto' : 'none',
+        }}
       >
         <span style={{ fontFamily: 'Inter,sans-serif', fontWeight: 500, fontSize: 18, color: '#000' }}>
-          Start mission
+          {btnText}
         </span>
       </a>
     </nav>

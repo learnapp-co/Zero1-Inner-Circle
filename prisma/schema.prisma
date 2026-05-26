@@ -35,6 +35,8 @@ model EventSettings {
   whatsappTemplateReminder   String?
   whatsappTemplatePlusOne    String?
   missionFormUrl             String?
+  missionFormEnabled         Boolean @default(true)
+  missionFormButtonText      String?
   instagramUrl               String?
   emailAddress               String?
   aboutText                  String?
